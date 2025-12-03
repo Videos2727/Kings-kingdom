@@ -1,435 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Kings Kingdom – Repository Resources</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --bg: #020617;
-      --card: #0f172a;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.15);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --border: #1f2937;
-      --radius: 16px;
-      --shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 55%, #000 100%);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      padding: 24px 12px;
-    }
-    .page {
-      width: 100%;
-      max-width: 960px;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      padding: 18px 18px 22px;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
-    .title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .logo {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: conic-gradient(from 210deg, #38bdf8, #6366f1, #a855f7, #38bdf8);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      color: #0b1120;
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
-    }
-    .subtitle {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .small { font-size: 0.8rem; }
+<meta charset="UTF-8" />
+<title>Kings Kingdom – Repository Resources</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+:root {
+--bg:#020617;
+--card:#0f172a;
+--accent:#38bdf8;
+--accent-soft:rgba(56,189,248,0.15);
+--text:#e5e7eb;
+--muted:#9ca3af;
+--border:#1f2937;
+--shadow:0 18px 40px rgba(15,23,42,.7)
+}
+*{box-sizing:border-box}
+body{
+margin:0;min-height:100vh;
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:radial-gradient(circle at top,#0b1120 0,#020617 55%,#000 100%);
+color:var(--text);display:flex;justify-content:center;padding:24px 12px
+}
+.page{
+max-width:960px;width:100%;
+background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(15,23,42,.96));
+border:1px solid var(--border);
+border-radius:24px;box-shadow:var(--shadow);padding:18px
+}
+header{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.title{font-size:1.35rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.logo{
+width:26px;height:26px;border-radius:50%;
+background:conic-gradient(from 210deg,#38bdf8,#6366f1,#a855f7,#38bdf8);
+display:flex;align-items:center;justify-content:center;
+color:#0b1120;box-shadow:0 0 14px rgba(56,189,248,.7)}
+.subtitle{font-size:.85rem;color:var(--muted);margin-top:2px}
 
-    .search-row {
-      margin: 8px 0 14px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .search-label {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    .search-input {
-      flex: 1 1 220px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--text);
-      font-size: 0.85rem;
-      outline: none;
-    }
-    .search-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent-soft);
-    }
+.search-row{margin:12px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.search-input{
+flex:1;
+padding:8px 12px;border-radius:999px;
+border:1px solid var(--border);
+background:#020617;color:var(--text)
+}
+.search-input:focus{outline:none;border-color:var(--accent)}
 
-    .folder-list {
-      margin-top: 6px;
-    }
+.folder{background:var(--card);border:1px solid var(--border);
+border-radius:14px;overflow:hidden}
+.folder-header{display:flex;align-items:center;padding:8px 10px}
+.folder-icon{background:linear-gradient(135deg,#facc15,#f97316);
+width:24px;height:24px;border-radius:6px;
+display:flex;align-items:center;justify-content:center}
+.folder-title{font-weight:600;padding-left:8px}
+.folder-meta{font-size:.75rem;color:var(--muted)}
 
-    .folder {
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      overflow: hidden;
-    }
-    .folder-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 8px 10px;
-      user-select: none;
-    }
-    .folder-header-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .folder-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      background: linear-gradient(135deg, #facc15, #f97316);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      color: #111827;
-    }
-    .folder-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-    .folder-meta {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-    }
-    th, td {
-      padding: 5px 6px;
-      border-bottom: 1px solid var(--border);
-    }
-    th {
-      text-align: left;
-      color: var(--muted);
-      font-weight: 500;
-      font-size: 0.78rem;
-    }
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    .file-path {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    .file-main-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .file-icon {
-      width: 18px;
-      display: inline-block;
-      text-align: center;
-    }
-
-    .tag {
-      display: inline-flex;
-      border-radius: 999px;
-      padding: 2px 6px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    .status-bar {
-      margin: 6px 0 0;
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-align: right;
-    }
-
-    footer {
-      margin-top: 14px;
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-align: center;
-    }
-    .error {
-      color: #fecaca;
-    }
-  </style>
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}
+th,td{border-bottom:1px solid var(--border);padding:5px 6px}
+th{color:var(--muted);font-size:.75rem;text-align:left}
+.file-main-link{display:flex;gap:6px;align-items:center}
+.file-path{font-size:.75rem;color:var(--muted)}
+.tag{
+font-size:.65rem;border:1px solid rgba(148,163,184,.6);
+padding:2px 6px;border-radius:999px;color:var(--muted)
+}
+.status-bar{text-align:right;font-size:.75rem;color:var(--muted)}
+.error{color:#fecaca}
+footer{text-align:center;color:var(--muted);margin-top:12px;font-size:.7rem}
+</style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div>
-        <div class="title">
-          <span class="logo">K</span>
-          <span>Kings Kingdom – Resources</span>
-        </div>
-        <div class="subtitle">
-          Auto-generated list of all files and folders in the
-          <strong>Videos2727/Kings-Kingdom</strong> repository (main branch).
-        </div>
-      </div>
-      <div class="small">
-        <!-- optional back link -->
-        <!-- <a href="index.html">← Back</a> -->
-      </div>
-    </header>
+<div class="page">
 
-    <div class="search-row">
-      <span class="search-label">Search by name or path:</span>
-      <input
-        id="search-input"
-        class="search-input"
-        type="search"
-        placeholder="e.g. chemistry, exam, unit 3, pdf..."
-      />
-    </div>
+<header>
+<div>
+<div class="title"><span class="logo">K</span> Kings Kingdom Resources</div>
+<div class="subtitle">Auto-index of the full repository</div>
+</div>
+</header>
 
-    <div class="folder-list">
-      <section class="folder">
-        <div class="folder-header">
-          <div class="folder-header-left">
-            <div class="folder-icon">📁</div>
-            <div>
-              <div class="folder-title">All resources</div>
-              <div class="folder-meta" id="folder-meta">
-                Loading repository contents...
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="folder-body">
-          <table>
-            <thead>
-              <tr>
-                <th>Name / Path</th>
-                <th style="width: 80px;">Kind</th>
-                <th style="width: 80px;">Format</th>
-              </tr>
-            </thead>
-            <tbody id="file-table-body">
-              <!-- Rows injected by JavaScript -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
+<div class="search-row">
+<input id="search" class="search-input" placeholder="Search files or folders...">
+</div>
 
-    <div class="status-bar" id="status-bar"></div>
+<div class="folder">
+<div class="folder-header">
+<div class="folder-icon">📁</div>
+<div>
+<div class="folder-title">All repository items</div>
+<div class="folder-meta" id="meta">Loading...</div>
+</div>
+</div>
 
-    <footer>
-      This page uses the public GitHub API to read repository contents and render them with a searchable index.
-    </footer>
-  </div>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody id="list"></tbody>
+</table>
+</div>
 
-  <script>
-    // Configured for: Videos2727 / Kings-Kingdom / main branch
-    const OWNER = "Videos2727";
-    const REPO = "Kings-Kingdom";
-    const BRANCH = "main";
-    const ROOT_PATH = "";   // "" = whole repo
+<div class="status-bar" id="status"></div>
 
-    const folderMetaEl = document.getElementById("folder-meta");
-    const tableBodyEl = document.getElementById("file-table-body");
-    const statusBarEl = document.getElementById("status-bar");
-    const searchInputEl = document.getElementById("search-input");
+<footer>Powered by GitHub API</footer>
 
-    async function fetchDirectory(path) {
-      const apiUrl = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(path)}?ref=${BRANCH}`;
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        throw new Error(`GitHub API error ${response.status} for ${apiUrl}`);
-      }
-      return response.json();
+</div>
+
+<script>
+// TARGET REPO
+const OWNER="Videos2727";
+const REPO="Kings-Kingdom";
+const BRANCH="main";
+const ROOT_PATH="";
+
+const list=document.getElementById("list");
+const meta=document.getElementById("meta");
+const search=document.getElementById("search");
+const status=document.getElementById("status");
+
+// Encode each path segment correctly (fix for spaces/slashes)
+async function fetchDir(path){
+  const encoded=path?path.split("/").map(encodeURIComponent).join("/"):"";
+  const url=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${encoded}?ref=${BRANCH}`;
+  const r=await fetch(url);
+  if(!r.ok){
+    let msg=`${r.status} ${r.statusText}`;
+    try{const j=await r.json();if(j.message)msg+=" – "+j.message}catch{}
+    throw new Error(msg);
+  }
+  return r.json();
+}
+
+// Recursively walk the repo
+async function walk(root){
+  const items=[];
+  async function go(p){
+    const entries=await fetchDir(p);
+    for(const e of entries){
+      if(e.name==="index.html") continue;
+      items.push({name:e.name,path:e.path,type:e.type});
+      if(e.type==="dir") await go(e.path);
     }
+  }
+  await go(root);
+  return items;
+}
 
-    async function traverseRepo(rootPath) {
-      const items = [];
-      async function walk(path) {
-        const entries = await fetchDirectory(path);
-        for (const entry of entries) {
-          // Skip this index file itself if it's in the same folder
-          if (
-            entry.name === "index.html" &&
-            entry.path === (ROOT_PATH ? ROOT_PATH + "/index.html" : "index.html")
-          ) {
-            continue;
-          }
-          items.push({
-            name: entry.name,
-            path: entry.path,
-            type: entry.type, // "file" or "dir"
-          });
-          if (entry.type === "dir") {
-            await walk(entry.path);
-          }
-        }
-      }
-      await walk(rootPath);
-      return items;
-    }
+function ext(n){
+const i=n.lastIndexOf(".");
+return i===-1?"-":n.slice(i+1).toUpperCase();
+}
 
-    function getExtension(name) {
-      const idx = name.lastIndexOf(".");
-      if (idx === -1) return "-";
-      return name.slice(idx + 1).toLowerCase();
-    }
+function row(item){
+const tr=document.createElement("tr");
+tr.dataset.name=item.name.toLowerCase();
+tr.dataset.path=item.path.toLowerCase();
 
-    function makeRow(item) {
-      const tr = document.createElement("tr");
-      tr.dataset.name = item.name.toLowerCase();
-      tr.dataset.path = item.path.toLowerCase();
+const a=document.createElement("a");
+a.className="file-main-link";
+a.target="_blank";
+a.rel="noopener";
+a.href=item.type==="dir"
+?`https://github.com/${OWNER}/${REPO}/tree/${BRANCH}/${item.path}`
+:item.path;
+a.innerHTML=(item.type==="dir"?"📁":"📄")+" "+item.name;
 
-      const isDir = item.type === "dir";
-      const ext = isDir ? "-" : getExtension(item.name);
+const name=document.createElement("td");
+name.appendChild(a);
+const path=document.createElement("div");
+path.className="file-path";
+path.textContent=item.path;
+name.appendChild(path);
 
-      const tdName = document.createElement("td");
-      const mainLink = document.createElement("a");
-      mainLink.className = "file-main-link";
-      mainLink.target = "_blank";
-      mainLink.rel = "noopener noreferrer";
+const kind=document.createElement("td");
+kind.innerHTML=`<span class="tag">${item.type==="dir"?"Folder":"File"}</span>`;
 
-      const iconSpan = document.createElement("span");
-      iconSpan.className = "file-icon";
-      iconSpan.textContent = isDir ? "📁" : "📄";
+const format=document.createElement("td");
+format.textContent=item.type==="dir"?"-":ext(item.name);
 
-      const nameSpan = document.createElement("span");
-      nameSpan.textContent = item.name;
+tr.appendChild(name);
+tr.appendChild(kind);
+tr.appendChild(format);
+return tr;
+}
 
-      mainLink.appendChild(iconSpan);
-      mainLink.appendChild(nameSpan);
+// Filter on input
+search.oninput=()=>{
+const q=search.value.toLowerCase();
+let c=0;
+document.querySelectorAll("tr").forEach(r=>{
+const m=r.dataset.name.includes(q)||r.dataset.path.includes(q);
+r.style.display=m?"":"none";
+if(m)c++;
+});
+status.textContent=q?`${c} match(es)`:"";
+};
 
-      if (isDir) {
-        // For folders, link to GitHub tree view
-        mainLink.href = `https://github.com/${OWNER}/${REPO}/tree/${BRANCH}/${item.path}`;
-      } else {
-        // For files, use relative path so it works via GitHub Pages
-        mainLink.href = item.path;
-      }
+// Init
+(async()=>{
+try{
+meta.textContent="Scanning repository...";
+const items=await walk(ROOT_PATH);
+items.sort((a,b)=>a.type!==b.type?a.type==="dir"?-1:1:a.path.localeCompare(b.path));
+items.forEach(i=>list.appendChild(row(i)));
+meta.textContent=`${items.length} items indexed`;
+}catch(e){
+meta.innerHTML="<span class='error'>Failed to load repo</span>";
+status.innerHTML=`<span class='error'>${e.message}</span>`;
+}
+})();
+</script>
 
-      const pathDiv = document.createElement("div");
-      pathDiv.className = "file-path";
-      pathDiv.textContent = item.path;
-
-      tdName.appendChild(mainLink);
-      tdName.appendChild(pathDiv);
-
-      const tdKind = document.createElement("td");
-      const kindTag = document.createElement("span");
-      kindTag.className = "tag";
-      kindTag.textContent = isDir ? "Folder" : "File";
-      tdKind.appendChild(kindTag);
-
-      const tdFormat = document.createElement("td");
-      tdFormat.textContent = ext.toUpperCase();
-
-      tr.appendChild(tdName);
-      tr.appendChild(tdKind);
-      tr.appendChild(tdFormat);
-
-      return tr;
-    }
-
-    function renderTable(items) {
-      // sort: folders first, then files; then by path
-      items.sort((a, b) => {
-        if (a.type !== b.type) return a.type === "dir" ? -1 : 1;
-        return a.path.localeCompare(b.path);
-      });
-
-      tableBodyEl.innerHTML = "";
-      for (const item of items) {
-        tableBodyEl.appendChild(makeRow(item));
-      }
-    }
-
-    function applySearchFilter() {
-      const q = searchInputEl.value.trim().toLowerCase();
-      const rows = tableBodyEl.querySelectorAll("tr");
-      let visible = 0;
-
-      rows.forEach(row => {
-        const name = row.dataset.name || "";
-        const path = row.dataset.path || "";
-        const match = !q || name.includes(q) || path.includes(q);
-        row.style.display = match ? "" : "none";
-        if (match) visible++;
-      });
-
-      if (q) {
-        statusBarEl.textContent = `${visible} item(s) match "${q}"`;
-      } else {
-        statusBarEl.textContent = "";
-      }
-    }
-
-    searchInputEl.addEventListener("input", applySearchFilter);
-
-    (async function init() {
-      try {
-        const rootLabel = ROOT_PATH || "/";
-        folderMetaEl.textContent = `Scanning repository ${OWNER}/${REPO} from "${rootLabel}"...`;
-        const items = await traverseRepo(ROOT_PATH || "");
-        renderTable(items);
-        folderMetaEl.textContent = `Found ${items.length} item(s) in ${OWNER}/${REPO}${ROOT_PATH ? "/" + ROOT_PATH : ""}.`;
-      } catch (err) {
-        console.error(err);
-        folderMetaEl.innerHTML = `<span class="error">Error loading repository contents.</span>`;
-        statusBarEl.innerHTML = `<span class="error">${err.message}</span>`;
-      }
-    })();
-  </script>
 </body>
 </html>
