@@ -1,794 +1,482 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Repository File Browser</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <title>Chemistry – Year 12 Resources</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #050816;
-      --bg-card: #0f172a;
+      --bg: #020617;
+      --card: #0f172a;
       --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.12);
+      --accent-soft: rgba(56, 189, 248, 0.15);
       --text: #e5e7eb;
       --muted: #9ca3af;
-      --danger: #f97373;
-      --radius-lg: 18px;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.7);
-      --shadow-soft-hover: 0 20px 50px rgba(15, 23, 42, 0.9);
-      --transition-fast: 0.18s ease-out;
+      --border: #1f2937;
+      --radius: 16px;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
+    * { box-sizing: border-box; }
     body {
+      margin: 0;
       min-height: 100vh;
-      background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 55%, #000 100%);
       color: var(--text);
       display: flex;
-      align-items: stretch;
       justify-content: center;
-      padding: 24px;
+      padding: 24px 12px;
     }
-
-    .app-shell {
+    .page {
       width: 100%;
-      max-width: 1100px;
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+      max-width: 900px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
       border-radius: 24px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      padding: 22px 20px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      position: relative;
-      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 18px 18px 22px;
     }
-
-    .app-shell::before {
-      content: "";
-      position: absolute;
-      inset: -30%;
-      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.10), transparent 60%);
-      opacity: 0.9;
-      pointer-events: none;
-      z-index: -1;
-    }
-
     header {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
     }
-
-    .title-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    h1 {
+    .title {
       font-size: 1.4rem;
-      letter-spacing: 0.04em;
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
-    .logo-pill {
+    .logo {
       width: 26px;
       height: 26px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #f97316, #22c55e, #06b6d4, #6366f1);
+      border-radius: 50%;
+      background: conic-gradient(from 210deg, #38bdf8, #6366f1, #a855f7, #38bdf8);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9), 0 0 18px rgba(56, 189, 248, 0.6);
+      font-size: 1rem;
+      color: #0b1120;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
     }
-
     .subtitle {
-      font-size: 0.86rem;
-      color: var(--muted);
-    }
-
-    .repo-pill {
-      padding: 6px 11px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      font-size: 0.8rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .repo-pill span.repo-name {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .search-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .search-wrapper {
-      flex: 1 1 220px;
-      position: relative;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 9px 36px 9px 30px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95));
-      color: var(--text);
-      font-size: 0.88rem;
-      outline: none;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 1);
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .search-input::placeholder {
-      color: rgba(148, 163, 184, 0.8);
-    }
-
-    .search-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.7), 0 10px 30px rgba(15, 23, 42, 0.9);
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.96));
-      transform: translateY(-1px);
-    }
-
-    .search-icon {
-      position: absolute;
-      top: 50%;
-      left: 10px;
-      transform: translateY(-50%);
       font-size: 0.85rem;
-      color: rgba(148, 163, 184, 0.9);
-    }
-
-    .kbd-hint {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      font-size: 0.7rem;
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: rgba(148, 163, 184, 0.95);
-      background: rgba(15, 23, 42, 0.95);
-    }
-
-    .meta-bar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 0.78rem;
       color: var(--muted);
-      margin-top: -2px;
     }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .small { font-size: 0.8rem; }
 
-    .meta-left {
+    /* Folder list */
+    .folder-list {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
     }
 
-    .badge {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.75rem;
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
-    }
-
-    .badge-pill {
-      background: var(--accent-soft);
-      border-color: rgba(56, 189, 248, 0.8);
-      color: #e0f2fe;
-    }
-
-    main {
-      margin-top: 4px;
-      padding: 10px 2px 4px;
-      background: radial-gradient(circle at top right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1));
-      border-radius: 18px;
-      border: 1px solid rgba(51, 65, 85, 0.8);
-      max-height: 70vh;
+    .folder {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
 
-    .list-scroll {
-      overflow-y: auto;
-      padding: 6px 6px 10px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(100, 116, 139, 0.9) rgba(15, 23, 42, 1);
-    }
-
-    .list-scroll::-webkit-scrollbar {
-      width: 7px;
-    }
-    .list-scroll::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 1);
-      border-radius: 999px;
-    }
-    .list-scroll::-webkit-scrollbar-thumb {
-      background: linear-gradient(to bottom, #64748b, #38bdf8);
-      border-radius: 999px;
-    }
-
-    .file-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .file-card {
+    .folder-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: 9px 11px;
-      border-radius: 14px;
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.92));
-      border: 1px solid rgba(51, 65, 85, 0.95);
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.7);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+      padding: 8px 10px;
+      cursor: pointer;
+      user-select: none;
     }
 
-    .file-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-soft-hover);
-      border-color: rgba(56, 189, 248, 0.7);
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.98));
-    }
-
-    .file-main {
+    .folder-header-left {
       display: flex;
       align-items: center;
-      gap: 10px;
-      min-width: 0;
-      flex: 1;
+      gap: 8px;
     }
 
-    .file-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.28), rgba(15, 23, 42, 1));
-      display: flex;
+    .folder-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #facc15, #f97316);
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-      box-shadow: 0 0 0 1px rgba(30, 64, 175, 0.8);
+      font-size: 1rem;
+      color: #111827;
     }
 
-    .file-text {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .folder-title {
+      font-size: 0.9rem;
+      font-weight: 600;
     }
 
-    .file-name {
-      font-size: 0.88rem;
-      font-weight: 500;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .file-path {
-      font-size: 0.76rem;
-      color: var(--muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .file-meta {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
+    .folder-meta {
       font-size: 0.75rem;
+      color: var(--muted);
     }
 
-    .ext-pill {
-      padding: 3px 7px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.65);
-      color: #e5e7eb;
-      text-transform: uppercase;
+    .folder-arrow {
+      font-size: 0.9rem;
+      transition: transform 0.2s ease;
     }
 
-    .btn-group {
-      display: flex;
-      gap: 6px;
-      flex-shrink: 0;
+    .folder.open .folder-arrow {
+      transform: rotate(90deg);
     }
 
-    .btn {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.85);
-      background: rgba(15, 23, 42, 0.98);
-      color: var(--text);
-      font-size: 0.74rem;
-      text-decoration: none;
+    .folder-body {
+      display: none;
+      border-top: 1px solid var(--border);
+      padding: 6px 10px 10px;
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .folder.open .folder-body {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    th, td {
+      padding: 5px 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      text-align: left;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 0.78rem;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .tag {
       display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
-    }
-
-    .btn:hover {
-      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.2), rgba(15, 23, 42, 1));
-      border-color: rgba(56, 189, 248, 0.9);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.8);
-    }
-
-    .btn-ghost {
-      border-style: dashed;
-      opacity: 0.9;
-    }
-
-    .status-line {
-      font-size: 0.8rem;
-      color: var(--muted);
-      padding: 3px 2px 6px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .status-left {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
       border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.32);
-    }
-
-    .status-error {
-      color: var(--danger);
-    }
-
-    .status-error .status-dot {
-      background: var(--danger);
-      box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.35);
-    }
-
-    .status-right {
-      font-size: 0.76rem;
-    }
-
-    .pill-count {
-      padding: 2px 8px;
-      border-radius: 999px;
+      padding: 2px 6px;
       border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(15, 23, 42, 0.96);
-    }
-
-    .empty-state {
-      padding: 20px 10px 30px;
-      text-align: center;
+      font-size: 0.7rem;
       color: var(--muted);
-      font-size: 0.86rem;
     }
 
-    .empty-state strong {
-      color: var(--text);
-    }
-
-    .spinner {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      border: 2px solid rgba(148, 163, 184, 0.25);
-      border-top-color: var(--accent);
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 12px;
-      }
-      .app-shell {
-        border-radius: 18px;
-        padding: 16px 12px 14px;
-      }
-      main {
-        max-height: 68vh;
-      }
-      .file-card {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .file-meta {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .btn-group {
-        margin-left: auto;
-      }
+    footer {
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="app-shell">
+  <div class="page">
     <header>
-      <div class="title-group">
-        <h1>
-          <span class="logo-pill">∞</span>
-          Repo Explorer
-        </h1>
-        <p class="subtitle">Browse and search every file in this GitHub repository.</p>
+      <div>
+        <div class="title">
+          <span class="logo">C</span>
+          <span>Chemistry – Year 12</span>
+        </div>
+        <div class="subtitle">
+          WACE Chemistry Year 12 resources stored in this repository.  
+          Click a 📁 folder to open Textbooks, Assessments, Programs, PowerPoints, Notes or Videos.
+        </div>
       </div>
-      <div class="repo-pill">
-        <span></span>
-        <span class="repo-name" id="repoLabel">loading…</span>
+      <div class="small">
+        <a href="../../index.html">← Back to main vault</a>
       </div>
     </header>
 
-    <div class="search-row">
-      <div class="search-wrapper">
-        <span class="search-icon">🔍</span>
-        <input
-          id="searchInput"
-          class="search-input"
-          type="search"
-          placeholder="Search files by name or path…"
-          autocomplete="off"
-        />
-        <span class="kbd-hint">/</span>
-      </div>
+    <div class="folder-list">
 
-      <div class="badge badge-pill">
-        <span class="badge-dot"></span>
-        <span id="branchLabel">branch: —</span>
-      </div>
+      <!-- TEXTBOOKS FOLDER -->
+      <section class="folder open">
+        <div class="folder-header">
+          <div class="folder-header-left">
+            <div class="folder-icon">📁</div>
+            <div>
+              <div class="folder-title">Textbooks</div>
+              <div class="folder-meta">Key revision books, course texts, reference materials.</div>
+            </div>
+          </div>
+          <div class="folder-arrow">▶</div>
+        </div>
+        <div class="folder-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th style="width: 90px;">Format</th>
+                <th style="width: 80px;">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Make sure this file is uploaded to chemistry/y12/textbooks/ -->
+              <tr>
+                <td>
+                  <a href="textbooks/chem_y12_atf_revision_3_4.pdf" target="_blank" rel="noopener noreferrer">
+                    ATF Chemistry ATAR Course Revision Series – Units 3 &amp; 4
+                  </a>
+                </td>
+                <td>PDF</td>
+                <td><span class="tag">Local file</span></td>
+              </tr>
+              <!-- Add more textbook rows here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ASSESSMENTS FOLDER -->
+      <section class="folder">
+        <div class="folder-header">
+          <div class="folder-header-left">
+            <div class="folder-icon">📁</div>
+            <div>
+              <div class="folder-title">Assessments</div>
+              <div class="folder-meta">Tests, exams, practice questions, marking keys.</div>
+            </div>
+          </div>
+          <div class="folder-arrow">▶</div>
+        </div>
+        <div class="folder-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th style="width: 90px;">Format</th>
+                <th style="width: 80px;">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="assessments/chem_y12_atar_exam_pack.pdf" target="_blank" rel="noopener noreferrer">
+                    Chemistry Y12 ATAR – Practice Exam Pack
+                  </a>
+                </td>
+                <td>PDF</td>
+                <td><span class="tag">Local file</span></td>
+              </tr>
+              <!-- Add more assessment rows here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PROGRAMS FOLDER -->
+      <section class="folder">
+        <div class="folder-header">
+          <div class="folder-header-left">
+            <div class="folder-icon">📁</div>
+            <div>
+              <div class="folder-title">Programs</div>
+              <div class="folder-meta">Year programs, scope &amp; sequence, planners.</div>
+            </div>
+          </div>
+          <div class="folder-arrow">▶</div>
+        </div>
+        <div class="folder-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th style="width: 90px;">Format</th>
+                <th style="width: 80px;">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="programs/chem_y12_year_program.docx" target="_blank" rel="noopener noreferrer">
+                    Chemistry ATAR Year 12 – Year Program
+                  </a>
+                </td>
+                <td>DOCX</td>
+                <td><span class="tag">Local file</span></td>
+              </tr>
+              <!-- Add more program rows here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- POWERPOINTS FOLDER -->
+      <section class="folder">
+        <div class="folder-header">
+          <div class="folder-header-left">
+            <div class="folder-icon">📁</div>
+            <div>
+              <div class="folder-title">PowerPoints</div>
+              <div class="folder-meta">Lesson slides and presentations.</div>
+            </div>
+          </div>
+          <div class="folder-arrow">▶</div>
+        </div>
+        <div class="folder-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th style="width: 90px;">Format</th>
+                <th style="width: 80px;">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="powerpoints/chem_y12_intro_organic.pptx" target="_blank" rel="noopener noreferrer">
+                    Intro to Organic Chemistry – Lesson PowerPoint
+                  </a>
+                </td>
+                <td>PPTX</td>
+                <td><span class="tag">Local file</span></td>
+              </tr>
+              <!-- Add more PowerPoint rows here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- NOTES FOLDER -->
+      <section class="folder">
+        <div class="folder-header">
+          <div class="folder-header-left">
+            <div class="folder-icon">📁</div>
+            <div>
+              <div class="folder-title">Notes</div>
+              <div class="folder-meta">Summary notes, checklists, formula sheets.</div>
+            </div>
+          </div>
+          <div class="folder-arrow">▶</div>
+        </div>
+        <div class="folder-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th style="width: 90px;">Format</th>
+                <th style="width: 80px;">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="notes/chem_y12_equilibrium_notes.pdf" target="_blank" rel="noopener noreferrer">
+                    Chemical Equilibrium – Summary Notes
+                  </a>
+                </td>
+                <td>PDF</td>
+                <td><span class="tag">Local file</span></td>
+              </tr>
+              <!-- Add more notes rows here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- VIDEOS FOLDER -->
+      <section class="folder">
+        <div class="folder-header">
+          <div class="folder-header-left">
+            <div class="folder-icon">📁</div>
+            <div>
+              <div class="folder-title">Videos</div>
+              <div class="folder-meta">Recorded explanations, worked solutions, links.</div>
+            </div>
+          </div>
+          <div class="folder-arrow">▶</div>
+        </div>
+        <div class="folder-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th style="width: 90px;">Format</th>
+                <th style="width: 80px;">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="videos/redox_video_link.txt" target="_blank" rel="noopener noreferrer">
+                    Redox Reactions – Video Explanation (link)
+                  </a>
+                </td>
+                <td>TXT</td>
+                <td><span class="tag">Local file</span></td>
+              </tr>
+              <!-- If you have .mp4 files, link them here instead -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- OTHER FOLDER -->
+      <section class="folder">
+        <div class="folder-header">
+          <div class="folder-header-left">
+            <div class="folder-icon">📁</div>
+            <div>
+              <div class="folder-title">Other</div>
+              <div class="folder-meta">Any resources that don’t fit the main categories.</div>
+            </div>
+          </div>
+          <div class="folder-arrow">▶</div>
+        </div>
+        <div class="folder-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th style="width: 90px;">Format</th>
+                <th style="width: 80px;">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="small muted" colspan="3">
+                  No “Other” files yet. Add rows here if you need them.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
     </div>
 
-    <div class="meta-bar">
-      <div class="meta-left">
-        <span>Tip: type to filter, press <strong>/</strong> to jump to search.</span>
-      </div>
-      <div>
-        <span id="fileCountSummary">Loading files…</span>
-      </div>
-    </div>
-
-    <main>
-      <div class="list-scroll">
-        <div id="fileList" class="file-list"></div>
-      </div>
-
-      <div id="statusBar" class="status-line">
-        <div class="status-left">
-          <span class="status-dot"></span>
-          <span id="statusText">Fetching repository tree from GitHub…</span>
-        </div>
-        <div class="status-right">
-          <span id="visibleCount" class="pill-count">0 visible</span>
-        </div>
-      </div>
-    </main>
+    <footer>
+      Upload files into the matching subfolders
+      (<code>textbooks</code>, <code>assessments</code>, <code>programs</code>, <code>powerpoints</code>, <code>notes</code>, <code>videos</code>)
+      and update the links above to match the filenames.
+    </footer>
   </div>
 
   <script>
-    // =========================
-    // 🔧 CONFIG – EDIT THESE
-    // =========================
-    const GITHUB_OWNER = "Videos2727"; // ← change
-    const GITHUB_REPO  = "Kings-kingdom"; // ← change
-    const GITHUB_BRANCH = "main";                // ← change, e.g. "master" or "gh-pages"
-
-    // =========================
-    // 🚀 APP LOGIC
-    // =========================
-    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/trees/${GITHUB_BRANCH}?recursive=1`;
-
-    const state = {
-      files: [],
-      filteredFiles: [],
-      loading: true,
-      error: null
-    };
-
-    const els = {
-      repoLabel: document.getElementById("repoLabel"),
-      branchLabel: document.getElementById("branchLabel"),
-      fileCountSummary: document.getElementById("fileCountSummary"),
-      fileList: document.getElementById("fileList"),
-      searchInput: document.getElementById("searchInput"),
-      statusBar: document.getElementById("statusBar"),
-      statusText: document.getElementById("statusText"),
-      visibleCount: document.getElementById("visibleCount")
-    };
-
-    function getFileIcon(ext) {
-      const lower = ext.toLowerCase();
-      if (!lower) return "📄";
-
-      if (["md", "mdx"].includes(lower)) return "📝";
-      if (["js", "ts", "tsx", "jsx", "mjs", "cjs"].includes(lower)) return "💻";
-      if (["html", "htm"].includes(lower)) return "🌐";
-      if (["css", "scss", "sass", "less"].includes(lower)) return "🎨";
-      if (["json"].includes(lower)) return "🧩";
-      if (["yml", "yaml"].includes(lower)) return "⚙️";
-      if (["png", "jpg", "jpeg", "gif", "svg", "webp"].includes(lower)) return "🖼️";
-      if (["pdf"].includes(lower)) return "📚";
-      if (["zip", "rar", "7z"].includes(lower)) return "🗜️";
-      if (["csv", "xlsx", "xls"].includes(lower)) return "📊";
-      if (["py", "rb", "php", "java", "c", "cpp", "cs", "go", "rs"].includes(lower)) return "🧪";
-
-      return "📄";
-    }
-
-    function getExtension(path) {
-      const parts = path.split("/");
-      const fileName = parts[parts.length - 1];
-      const idx = fileName.lastIndexOf(".");
-      if (idx === -1) return "";
-      return fileName.slice(idx + 1);
-    }
-
-    function buildGitHubUrl(path) {
-      return `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/blob/${GITHUB_BRANCH}/${encodeURIComponent(path).replace(/%2F/g, "/")}`;
-    }
-
-    function buildRawUrl(path) {
-      return `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${encodeURIComponent(path).replace(/%2F/g, "/")}`;
-    }
-
-    function render() {
-      const { loading, error, filteredFiles, files } = state;
-
-      els.repoLabel.textContent = `${GITHUB_OWNER}/${GITHUB_REPO}`;
-      els.branchLabel.textContent = `branch: ${GITHUB_BRANCH}`;
-
-      if (loading) {
-        els.fileCountSummary.textContent = "Loading files…";
-        els.statusText.innerHTML = `
-          <span style="display:inline-flex;align-items:center;gap:6px;">
-            <span class="spinner"></span>
-            <span>Fetching repository tree from GitHub…</span>
-          </span>
-        `;
-        els.visibleCount.textContent = "0 visible";
-      } else if (error) {
-        els.fileCountSummary.textContent = "Could not load repository files.";
-        els.statusBar.classList.add("status-error");
-        els.statusText.textContent = error;
-        els.visibleCount.textContent = "0 visible";
-      } else {
-        els.fileCountSummary.textContent = `Loaded ${files.length} files from repository.`;
-        els.statusBar.classList.remove("status-error");
-
-        const total = files.length;
-        const visible = filteredFiles.length;
-        els.visibleCount.textContent = `${visible} visible`;
-
-        if (!visible) {
-          els.fileList.innerHTML = `
-            <div class="empty-state">
-              <p><strong>No files match your search.</strong></p>
-              <p>Try a different keyword or clear the search box.</p>
-            </div>
-          `;
-          els.statusText.textContent = "No files match the current search.";
-          return;
-        } else {
-          const searchTerm = els.searchInput.value.trim();
-          els.statusText.textContent = searchTerm
-            ? `Showing ${visible} of ${total} files for “${searchTerm}”.`
-            : `Showing all ${total} files.`;
-        }
-      }
-
-      if (loading || error) {
-        // Keep current list for error / loading
-        return;
-      }
-
-      const fragment = document.createDocumentFragment();
-
-      state.filteredFiles.forEach((file) => {
-        const ext = getExtension(file.path);
-        const icon = getFileIcon(ext);
-
-        const card = document.createElement("div");
-        card.className = "file-card";
-
-        const main = document.createElement("div");
-        main.className = "file-main";
-
-        const iconEl = document.createElement("div");
-        iconEl.className = "file-icon";
-        iconEl.textContent = icon;
-
-        const textWrap = document.createElement("div");
-        textWrap.className = "file-text";
-
-        const nameEl = document.createElement("div");
-        nameEl.className = "file-name";
-        nameEl.textContent = file.name;
-
-        const pathEl = document.createElement("div");
-        pathEl.className = "file-path";
-        pathEl.textContent = file.path;
-
-        textWrap.appendChild(nameEl);
-        textWrap.appendChild(pathEl);
-
-        main.appendChild(iconEl);
-        main.appendChild(textWrap);
-
-        const meta = document.createElement("div");
-        meta.className = "file-meta";
-
-        const extPill = document.createElement("span");
-        extPill.className = "ext-pill";
-        extPill.textContent = ext ? ext : "no ext";
-
-        const btnGroup = document.createElement("div");
-        btnGroup.className = "btn-group";
-
-        const viewBtn = document.createElement("a");
-        viewBtn.className = "btn";
-        viewBtn.href = buildGitHubUrl(file.path);
-        viewBtn.target = "_blank";
-        viewBtn.rel = "noopener noreferrer";
-        viewBtn.textContent = "View";
-
-        const rawBtn = document.createElement("a");
-        rawBtn.className = "btn btn-ghost";
-        rawBtn.href = buildRawUrl(file.path);
-        rawBtn.target = "_blank";
-        rawBtn.rel = "noopener noreferrer";
-        rawBtn.textContent = "Raw";
-
-        btnGroup.appendChild(viewBtn);
-        btnGroup.appendChild(rawBtn);
-
-        meta.appendChild(extPill);
-        meta.appendChild(btnGroup);
-
-        card.appendChild(main);
-        card.appendChild(meta);
-
-        fragment.appendChild(card);
+    // Toggle folders open/closed
+    document.querySelectorAll(".folder-header").forEach(header => {
+      header.addEventListener("click", () => {
+        const folder = header.parentElement;
+        folder.classList.toggle("open");
       });
-
-      els.fileList.innerHTML = "";
-      els.fileList.appendChild(fragment);
-    }
-
-    function applyFilter(query) {
-      const q = query.trim().toLowerCase();
-
-      if (!q) {
-        state.filteredFiles = [...state.files];
-      } else {
-        state.filteredFiles = state.files.filter((file) => {
-          const name = file.name.toLowerCase();
-          const path = file.path.toLowerCase();
-          return name.includes(q) || path.includes(q);
-        });
-      }
-
-      render();
-    }
-
-    async function init() {
-      try {
-        render();
-
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          let message = `GitHub API error (${response.status})`;
-          if (response.status === 404) {
-            message = "Repository or branch not found. Check owner, repo, and branch names.";
-          } else if (response.status === 403) {
-            message = "Rate limit exceeded or access forbidden. Try again later, or ensure the repository is public.";
-          }
-          throw new Error(message);
-        }
-
-        const data = await response.json();
-        if (!data.tree || !Array.isArray(data.tree)) {
-          throw new Error("Unexpected response from GitHub API.");
-        }
-
-        const files = data.tree
-          .filter((item) => item.type === "blob")
-          .map((item) => {
-            const parts = item.path.split("/");
-            const name = parts[parts.length - 1];
-            return { path: item.path, name };
-          })
-          .sort((a, b) => a.path.localeCompare(b.path));
-
-        state.files = files;
-        state.filteredFiles = [...files];
-        state.loading = false;
-        state.error = null;
-        render();
-      } catch (err) {
-        console.error(err);
-        state.loading = false;
-        state.error = err.message || "Failed to load repository files.";
-        render();
-      }
-    }
-
-    // Search events
-    els.searchInput.addEventListener("input", (e) => {
-      applyFilter(e.target.value);
     });
-
-    // Shortcut `/` to focus search
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "/" && document.activeElement !== els.searchInput) {
-        e.preventDefault();
-        els.searchInput.focus();
-        els.searchInput.select();
-      }
-    });
-
-    init();
   </script>
 </body>
 </html>
-
