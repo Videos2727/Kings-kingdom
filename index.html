@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Chemistry – Year 12 Resources</title>
+  <title>Kings Kingdom – Repository Resources</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -29,7 +29,7 @@
     }
     .page {
       width: 100%;
-      max-width: 900px;
+      max-width: 960px;
       background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
       border-radius: 24px;
       border: 1px solid var(--border);
@@ -76,11 +76,34 @@
     }
     .small { font-size: 0.8rem; }
 
-    /* Folder list */
-    .folder-list {
+    .search-row {
+      margin: 8px 0 14px;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .search-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .search-input {
+      flex: 1 1 220px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text);
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-soft);
+    }
+
+    .folder-list {
       margin-top: 6px;
     }
 
@@ -90,17 +113,14 @@
       background: var(--card);
       overflow: hidden;
     }
-
     .folder-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
       padding: 8px 10px;
-      cursor: pointer;
       user-select: none;
     }
-
     .folder-header-left {
       display: flex;
       align-items: center;
@@ -118,35 +138,13 @@
       font-size: 1rem;
       color: #111827;
     }
-
     .folder-title {
       font-size: 0.9rem;
       font-weight: 600;
     }
-
     .folder-meta {
       font-size: 0.75rem;
       color: var(--muted);
-    }
-
-    .folder-arrow {
-      font-size: 0.9rem;
-      transition: transform 0.2s ease;
-    }
-
-    .folder.open .folder-arrow {
-      transform: rotate(90deg);
-    }
-
-    .folder-body {
-      display: none;
-      border-top: 1px solid var(--border);
-      padding: 6px 10px 10px;
-      background: rgba(15, 23, 42, 0.95);
-    }
-
-    .folder.open .folder-body {
-      display: block;
     }
 
     table {
@@ -168,6 +166,21 @@
       border-bottom: none;
     }
 
+    .file-path {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .file-main-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .file-icon {
+      width: 18px;
+      display: inline-block;
+      text-align: center;
+    }
+
     .tag {
       display: inline-flex;
       border-radius: 999px;
@@ -177,11 +190,21 @@
       color: var(--muted);
     }
 
+    .status-bar {
+      margin: 6px 0 0;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
     footer {
       margin-top: 14px;
       font-size: 0.75rem;
       color: var(--muted);
       text-align: center;
+    }
+    .error {
+      color: #fecaca;
     }
   </style>
 </head>
@@ -190,293 +213,223 @@
     <header>
       <div>
         <div class="title">
-          <span class="logo">C</span>
-          <span>Chemistry – Year 12</span>
+          <span class="logo">K</span>
+          <span>Kings Kingdom – Resources</span>
         </div>
         <div class="subtitle">
-          WACE Chemistry Year 12 resources stored in this repository.  
-          Click a 📁 folder to open Textbooks, Assessments, Programs, PowerPoints, Notes or Videos.
+          Auto-generated list of all files and folders in the
+          <strong>Videos2727/Kings-Kingdom</strong> repository (main branch).
         </div>
       </div>
       <div class="small">
-        <a href="../../index.html">← Back to main vault</a>
+        <!-- optional back link -->
+        <!-- <a href="index.html">← Back</a> -->
       </div>
     </header>
 
-    <div class="folder-list">
-
-      <!-- TEXTBOOKS FOLDER -->
-      <section class="folder open">
-        <div class="folder-header">
-          <div class="folder-header-left">
-            <div class="folder-icon">📁</div>
-            <div>
-              <div class="folder-title">Textbooks</div>
-              <div class="folder-meta">Key revision books, course texts, reference materials.</div>
-            </div>
-          </div>
-          <div class="folder-arrow">▶</div>
-        </div>
-        <div class="folder-body">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th style="width: 90px;">Format</th>
-                <th style="width: 80px;">Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Make sure this file is uploaded to chemistry/y12/textbooks/ -->
-              <tr>
-                <td>
-                  <a href="textbooks/chem_y12_atf_revision_3_4.pdf" target="_blank" rel="noopener noreferrer">
-                    ATF Chemistry ATAR Course Revision Series – Units 3 &amp; 4
-                  </a>
-                </td>
-                <td>PDF</td>
-                <td><span class="tag">Local file</span></td>
-              </tr>
-              <!-- Add more textbook rows here -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- ASSESSMENTS FOLDER -->
-      <section class="folder">
-        <div class="folder-header">
-          <div class="folder-header-left">
-            <div class="folder-icon">📁</div>
-            <div>
-              <div class="folder-title">Assessments</div>
-              <div class="folder-meta">Tests, exams, practice questions, marking keys.</div>
-            </div>
-          </div>
-          <div class="folder-arrow">▶</div>
-        </div>
-        <div class="folder-body">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th style="width: 90px;">Format</th>
-                <th style="width: 80px;">Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <a href="assessments/chem_y12_atar_exam_pack.pdf" target="_blank" rel="noopener noreferrer">
-                    Chemistry Y12 ATAR – Practice Exam Pack
-                  </a>
-                </td>
-                <td>PDF</td>
-                <td><span class="tag">Local file</span></td>
-              </tr>
-              <!-- Add more assessment rows here -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- PROGRAMS FOLDER -->
-      <section class="folder">
-        <div class="folder-header">
-          <div class="folder-header-left">
-            <div class="folder-icon">📁</div>
-            <div>
-              <div class="folder-title">Programs</div>
-              <div class="folder-meta">Year programs, scope &amp; sequence, planners.</div>
-            </div>
-          </div>
-          <div class="folder-arrow">▶</div>
-        </div>
-        <div class="folder-body">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th style="width: 90px;">Format</th>
-                <th style="width: 80px;">Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <a href="programs/chem_y12_year_program.docx" target="_blank" rel="noopener noreferrer">
-                    Chemistry ATAR Year 12 – Year Program
-                  </a>
-                </td>
-                <td>DOCX</td>
-                <td><span class="tag">Local file</span></td>
-              </tr>
-              <!-- Add more program rows here -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- POWERPOINTS FOLDER -->
-      <section class="folder">
-        <div class="folder-header">
-          <div class="folder-header-left">
-            <div class="folder-icon">📁</div>
-            <div>
-              <div class="folder-title">PowerPoints</div>
-              <div class="folder-meta">Lesson slides and presentations.</div>
-            </div>
-          </div>
-          <div class="folder-arrow">▶</div>
-        </div>
-        <div class="folder-body">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th style="width: 90px;">Format</th>
-                <th style="width: 80px;">Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <a href="powerpoints/chem_y12_intro_organic.pptx" target="_blank" rel="noopener noreferrer">
-                    Intro to Organic Chemistry – Lesson PowerPoint
-                  </a>
-                </td>
-                <td>PPTX</td>
-                <td><span class="tag">Local file</span></td>
-              </tr>
-              <!-- Add more PowerPoint rows here -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- NOTES FOLDER -->
-      <section class="folder">
-        <div class="folder-header">
-          <div class="folder-header-left">
-            <div class="folder-icon">📁</div>
-            <div>
-              <div class="folder-title">Notes</div>
-              <div class="folder-meta">Summary notes, checklists, formula sheets.</div>
-            </div>
-          </div>
-          <div class="folder-arrow">▶</div>
-        </div>
-        <div class="folder-body">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th style="width: 90px;">Format</th>
-                <th style="width: 80px;">Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <a href="notes/chem_y12_equilibrium_notes.pdf" target="_blank" rel="noopener noreferrer">
-                    Chemical Equilibrium – Summary Notes
-                  </a>
-                </td>
-                <td>PDF</td>
-                <td><span class="tag">Local file</span></td>
-              </tr>
-              <!-- Add more notes rows here -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- VIDEOS FOLDER -->
-      <section class="folder">
-        <div class="folder-header">
-          <div class="folder-header-left">
-            <div class="folder-icon">📁</div>
-            <div>
-              <div class="folder-title">Videos</div>
-              <div class="folder-meta">Recorded explanations, worked solutions, links.</div>
-            </div>
-          </div>
-          <div class="folder-arrow">▶</div>
-        </div>
-        <div class="folder-body">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th style="width: 90px;">Format</th>
-                <th style="width: 80px;">Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <a href="videos/redox_video_link.txt" target="_blank" rel="noopener noreferrer">
-                    Redox Reactions – Video Explanation (link)
-                  </a>
-                </td>
-                <td>TXT</td>
-                <td><span class="tag">Local file</span></td>
-              </tr>
-              <!-- If you have .mp4 files, link them here instead -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- OTHER FOLDER -->
-      <section class="folder">
-        <div class="folder-header">
-          <div class="folder-header-left">
-            <div class="folder-icon">📁</div>
-            <div>
-              <div class="folder-title">Other</div>
-              <div class="folder-meta">Any resources that don’t fit the main categories.</div>
-            </div>
-          </div>
-          <div class="folder-arrow">▶</div>
-        </div>
-        <div class="folder-body">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th style="width: 90px;">Format</th>
-                <th style="width: 80px;">Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="small muted" colspan="3">
-                  No “Other” files yet. Add rows here if you need them.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
+    <div class="search-row">
+      <span class="search-label">Search by name or path:</span>
+      <input
+        id="search-input"
+        class="search-input"
+        type="search"
+        placeholder="e.g. chemistry, exam, unit 3, pdf..."
+      />
     </div>
 
+    <div class="folder-list">
+      <section class="folder">
+        <div class="folder-header">
+          <div class="folder-header-left">
+            <div class="folder-icon">📁</div>
+            <div>
+              <div class="folder-title">All resources</div>
+              <div class="folder-meta" id="folder-meta">
+                Loading repository contents...
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="folder-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name / Path</th>
+                <th style="width: 80px;">Kind</th>
+                <th style="width: 80px;">Format</th>
+              </tr>
+            </thead>
+            <tbody id="file-table-body">
+              <!-- Rows injected by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <div class="status-bar" id="status-bar"></div>
+
     <footer>
-      Upload files into the matching subfolders
-      (<code>textbooks</code>, <code>assessments</code>, <code>programs</code>, <code>powerpoints</code>, <code>notes</code>, <code>videos</code>)
-      and update the links above to match the filenames.
+      This page uses the public GitHub API to read repository contents and render them with a searchable index.
     </footer>
   </div>
 
   <script>
-    // Toggle folders open/closed
-    document.querySelectorAll(".folder-header").forEach(header => {
-      header.addEventListener("click", () => {
-        const folder = header.parentElement;
-        folder.classList.toggle("open");
+    // Configured for: Videos2727 / Kings-Kingdom / main branch
+    const OWNER = "Videos2727";
+    const REPO = "Kings-Kingdom";
+    const BRANCH = "main";
+    const ROOT_PATH = "";   // "" = whole repo
+
+    const folderMetaEl = document.getElementById("folder-meta");
+    const tableBodyEl = document.getElementById("file-table-body");
+    const statusBarEl = document.getElementById("status-bar");
+    const searchInputEl = document.getElementById("search-input");
+
+    async function fetchDirectory(path) {
+      const apiUrl = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(path)}?ref=${BRANCH}`;
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error(`GitHub API error ${response.status} for ${apiUrl}`);
+      }
+      return response.json();
+    }
+
+    async function traverseRepo(rootPath) {
+      const items = [];
+      async function walk(path) {
+        const entries = await fetchDirectory(path);
+        for (const entry of entries) {
+          // Skip this index file itself if it's in the same folder
+          if (
+            entry.name === "index.html" &&
+            entry.path === (ROOT_PATH ? ROOT_PATH + "/index.html" : "index.html")
+          ) {
+            continue;
+          }
+          items.push({
+            name: entry.name,
+            path: entry.path,
+            type: entry.type, // "file" or "dir"
+          });
+          if (entry.type === "dir") {
+            await walk(entry.path);
+          }
+        }
+      }
+      await walk(rootPath);
+      return items;
+    }
+
+    function getExtension(name) {
+      const idx = name.lastIndexOf(".");
+      if (idx === -1) return "-";
+      return name.slice(idx + 1).toLowerCase();
+    }
+
+    function makeRow(item) {
+      const tr = document.createElement("tr");
+      tr.dataset.name = item.name.toLowerCase();
+      tr.dataset.path = item.path.toLowerCase();
+
+      const isDir = item.type === "dir";
+      const ext = isDir ? "-" : getExtension(item.name);
+
+      const tdName = document.createElement("td");
+      const mainLink = document.createElement("a");
+      mainLink.className = "file-main-link";
+      mainLink.target = "_blank";
+      mainLink.rel = "noopener noreferrer";
+
+      const iconSpan = document.createElement("span");
+      iconSpan.className = "file-icon";
+      iconSpan.textContent = isDir ? "📁" : "📄";
+
+      const nameSpan = document.createElement("span");
+      nameSpan.textContent = item.name;
+
+      mainLink.appendChild(iconSpan);
+      mainLink.appendChild(nameSpan);
+
+      if (isDir) {
+        // For folders, link to GitHub tree view
+        mainLink.href = `https://github.com/${OWNER}/${REPO}/tree/${BRANCH}/${item.path}`;
+      } else {
+        // For files, use relative path so it works via GitHub Pages
+        mainLink.href = item.path;
+      }
+
+      const pathDiv = document.createElement("div");
+      pathDiv.className = "file-path";
+      pathDiv.textContent = item.path;
+
+      tdName.appendChild(mainLink);
+      tdName.appendChild(pathDiv);
+
+      const tdKind = document.createElement("td");
+      const kindTag = document.createElement("span");
+      kindTag.className = "tag";
+      kindTag.textContent = isDir ? "Folder" : "File";
+      tdKind.appendChild(kindTag);
+
+      const tdFormat = document.createElement("td");
+      tdFormat.textContent = ext.toUpperCase();
+
+      tr.appendChild(tdName);
+      tr.appendChild(tdKind);
+      tr.appendChild(tdFormat);
+
+      return tr;
+    }
+
+    function renderTable(items) {
+      // sort: folders first, then files; then by path
+      items.sort((a, b) => {
+        if (a.type !== b.type) return a.type === "dir" ? -1 : 1;
+        return a.path.localeCompare(b.path);
       });
-    });
+
+      tableBodyEl.innerHTML = "";
+      for (const item of items) {
+        tableBodyEl.appendChild(makeRow(item));
+      }
+    }
+
+    function applySearchFilter() {
+      const q = searchInputEl.value.trim().toLowerCase();
+      const rows = tableBodyEl.querySelectorAll("tr");
+      let visible = 0;
+
+      rows.forEach(row => {
+        const name = row.dataset.name || "";
+        const path = row.dataset.path || "";
+        const match = !q || name.includes(q) || path.includes(q);
+        row.style.display = match ? "" : "none";
+        if (match) visible++;
+      });
+
+      if (q) {
+        statusBarEl.textContent = `${visible} item(s) match "${q}"`;
+      } else {
+        statusBarEl.textContent = "";
+      }
+    }
+
+    searchInputEl.addEventListener("input", applySearchFilter);
+
+    (async function init() {
+      try {
+        const rootLabel = ROOT_PATH || "/";
+        folderMetaEl.textContent = `Scanning repository ${OWNER}/${REPO} from "${rootLabel}"...`;
+        const items = await traverseRepo(ROOT_PATH || "");
+        renderTable(items);
+        folderMetaEl.textContent = `Found ${items.length} item(s) in ${OWNER}/${REPO}${ROOT_PATH ? "/" + ROOT_PATH : ""}.`;
+      } catch (err) {
+        console.error(err);
+        folderMetaEl.innerHTML = `<span class="error">Error loading repository contents.</span>`;
+        statusBarEl.innerHTML = `<span class="error">${err.message}</span>`;
+      }
+    })();
   </script>
 </body>
 </html>
