@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Kings Kingdom – Repository Resources</title>
+<title>Kings Kingdom – Repository Index</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
 :root {
 --bg:#020617;
 --card:#0f172a;
 --accent:#38bdf8;
---accent-soft:rgba(56,189,248,0.15);
 --text:#e5e7eb;
 --muted:#9ca3af;
 --border:#1f2937;
@@ -17,52 +16,92 @@
 }
 *{box-sizing:border-box}
 body{
-margin:0;min-height:100vh;
+margin:0;
+min-height:100vh;
 font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 background:radial-gradient(circle at top,#0b1120 0,#020617 55%,#000 100%);
-color:var(--text);display:flex;justify-content:center;padding:24px 12px
+color:var(--text);
+display:flex;
+justify-content:center;
+padding:24px 12px
 }
 .page{
-max-width:960px;width:100%;
+max-width:960px;
+width:100%;
 background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(15,23,42,.96));
 border:1px solid var(--border);
-border-radius:24px;box-shadow:var(--shadow);padding:18px
+border-radius:24px;
+box-shadow:var(--shadow);
+padding:18px
 }
-header{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.title{font-size:1.35rem;font-weight:700;display:flex;align-items:center;gap:8px}
+header{display:flex;justify-content:space-between;flex-wrap:wrap}
+.title{
+font-size:1.4rem;
+font-weight:700;
+display:flex;
+align-items:center;
+gap:8px
+}
 .logo{
-width:26px;height:26px;border-radius:50%;
+width:26px;
+height:26px;
+border-radius:50%;
 background:conic-gradient(from 210deg,#38bdf8,#6366f1,#a855f7,#38bdf8);
-display:flex;align-items:center;justify-content:center;
-color:#0b1120;box-shadow:0 0 14px rgba(56,189,248,.7)}
-.subtitle{font-size:.85rem;color:var(--muted);margin-top:2px}
-
-.search-row{margin:12px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.search-input{
-flex:1;
-padding:8px 12px;border-radius:999px;
-border:1px solid var(--border);
-background:#020617;color:var(--text)
+display:flex;
+align-items:center;
+justify-content:center;
+color:#0b1120;
+box-shadow:0 0 14px rgba(56,189,248,.7)
 }
-.search-input:focus{outline:none;border-color:var(--accent)}
-
-.folder{background:var(--card);border:1px solid var(--border);
-border-radius:14px;overflow:hidden}
-.folder-header{display:flex;align-items:center;padding:8px 10px}
-.folder-icon{background:linear-gradient(135deg,#facc15,#f97316);
-width:24px;height:24px;border-radius:6px;
-display:flex;align-items:center;justify-content:center}
-.folder-title{font-weight:600;padding-left:8px}
+.subtitle{font-size:.85rem;color:var(--muted);margin-top:4px}
+.folder{
+margin-top:12px;
+border-radius:14px;
+border:1px solid var(--border);
+background:var(--card);
+overflow:hidden
+}
+.folder-header{
+display:flex;
+gap:8px;
+align-items:center;
+padding:8px 10px
+}
+.folder-icon{
+background:linear-gradient(135deg,#facc15,#f97316);
+width:24px;
+height:24px;
+border-radius:6px;
+display:flex;
+align-items:center;
+justify-content:center
+}
+.folder-title{font-weight:600}
 .folder-meta{font-size:.75rem;color:var(--muted)}
 
-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}
-th,td{border-bottom:1px solid var(--border);padding:5px 6px}
-th{color:var(--muted);font-size:.75rem;text-align:left}
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+font-size:.85rem
+}
+th,td{
+border-bottom:1px solid var(--border);
+padding:6px
+}
+th{
+color:var(--muted);
+font-size:.75rem;
+text-align:left
+}
 .file-main-link{display:flex;gap:6px;align-items:center}
 .file-path{font-size:.75rem;color:var(--muted)}
 .tag{
-font-size:.65rem;border:1px solid rgba(148,163,184,.6);
-padding:2px 6px;border-radius:999px;color:var(--muted)
+font-size:.65rem;
+border:1px solid rgba(148,163,184,.6);
+padding:2px 6px;
+border-radius:999px;
+color:var(--muted)
 }
 .status-bar{text-align:right;font-size:.75rem;color:var(--muted)}
 .error{color:#fecaca}
@@ -70,24 +109,20 @@ footer{text-align:center;color:var(--muted);margin-top:12px;font-size:.7rem}
 </style>
 </head>
 <body>
-<div class="page">
 
+<div class="page">
 <header>
 <div>
-<div class="title"><span class="logo">K</span> Kings Kingdom Resources</div>
-<div class="subtitle">Auto-index of the full repository</div>
+<div class="title"><span class="logo">K</span>Kings Kingdom Resources</div>
+<div class="subtitle">Live index of your GitHub repository</div>
 </div>
 </header>
-
-<div class="search-row">
-<input id="search" class="search-input" placeholder="Search files or folders...">
-</div>
 
 <div class="folder">
 <div class="folder-header">
 <div class="folder-icon">📁</div>
 <div>
-<div class="folder-title">All repository items</div>
+<div class="folder-title">All files and folders</div>
 <div class="folder-meta" id="meta">Loading...</div>
 </div>
 </div>
@@ -105,113 +140,101 @@ footer{text-align:center;color:var(--muted);margin-top:12px;font-size:.7rem}
 </div>
 
 <div class="status-bar" id="status"></div>
-
 <footer>Powered by GitHub API</footer>
-
 </div>
 
 <script>
-// TARGET REPO
-const OWNER="Videos2727";
-const REPO="Kings-Kingdom";
-const BRANCH="main";
-const ROOT_PATH="";
+// REPO SETTINGS
+const OWNER = "Videos2727";
+const REPO = "Kings-Kingdom";
+const BRANCH = "main";
 
-const list=document.getElementById("list");
-const meta=document.getElementById("meta");
-const search=document.getElementById("search");
-const status=document.getElementById("status");
-
-// Encode each path segment correctly (fix for spaces/slashes)
-async function fetchDir(path){
-  const encoded=path?path.split("/").map(encodeURIComponent).join("/"):"";
-  const url=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${encoded}?ref=${BRANCH}`;
-  const r=await fetch(url);
-  if(!r.ok){
-    let msg=`${r.status} ${r.statusText}`;
-    try{const j=await r.json();if(j.message)msg+=" – "+j.message}catch{}
+// Encode path segments correctly (fix for spaces and slashes)
+async function fetchDir(path) {
+  const encoded = path ? path.split("/").map(encodeURIComponent).join("/") : "";
+  const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${encoded}?ref=${BRANCH}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    let msg = `${response.status} ${response.statusText}`;
+    try {
+      const json = await response.json();
+      if (json.message) msg += " – " + json.message;
+    } catch {}
     throw new Error(msg);
   }
-  return r.json();
+  return response.json();
 }
 
-// Recursively walk the repo
-async function walk(root){
-  const items=[];
-  async function go(p){
-    const entries=await fetchDir(p);
-    for(const e of entries){
-      if(e.name==="index.html") continue;
-      items.push({name:e.name,path:e.path,type:e.type});
-      if(e.type==="dir") await go(e.path);
+// Recursive repo read
+async function walk(path) {
+  const items = [];
+  async function loop(p) {
+    const data = await fetchDir(p);
+    for (const entry of data) {
+      if (entry.name === "index.html") continue;
+      items.push({
+        name: entry.name,
+        path: entry.path,
+        type: entry.type
+      });
+      if (entry.type === "dir") await loop(entry.path);
     }
   }
-  await go(root);
+  await loop("");
   return items;
 }
 
-function ext(n){
-const i=n.lastIndexOf(".");
-return i===-1?"-":n.slice(i+1).toUpperCase();
+function ext(name) {
+  const i = name.lastIndexOf(".");
+  if (i === -1) return "-";
+  return name.slice(i + 1).toUpperCase();
 }
 
-function row(item){
-const tr=document.createElement("tr");
-tr.dataset.name=item.name.toLowerCase();
-tr.dataset.path=item.path.toLowerCase();
+function makeRow(item) {
+  const tr = document.createElement("tr");
 
-const a=document.createElement("a");
-a.className="file-main-link";
-a.target="_blank";
-a.rel="noopener";
-a.href=item.type==="dir"
-?`https://github.com/${OWNER}/${REPO}/tree/${BRANCH}/${item.path}`
-:item.path;
-a.innerHTML=(item.type==="dir"?"📁":"📄")+" "+item.name;
+  const link = document.createElement("a");
+  link.className = "file-main-link";
+  link.textContent = (item.type === "dir" ? "📁 " : "📄 ") + item.name;
+  link.href = item.type === "dir"
+    ? `https://github.com/${OWNER}/${REPO}/tree/${BRANCH}/${item.path}`
+    : item.path;
+  link.target = "_blank";
 
-const name=document.createElement("td");
-name.appendChild(a);
-const path=document.createElement("div");
-path.className="file-path";
-path.textContent=item.path;
-name.appendChild(path);
+  const nameTd = document.createElement("td");
+  const small = document.createElement("div");
+  small.className = "file-path";
+  small.textContent = item.path;
+  nameTd.appendChild(link);
+  nameTd.appendChild(small);
 
-const kind=document.createElement("td");
-kind.innerHTML=`<span class="tag">${item.type==="dir"?"Folder":"File"}</span>`;
+  const typeTd = document.createElement("td");
+  typeTd.innerHTML = `<span class="tag">${item.type === "dir" ? "Folder" : "File"}</span>`;
 
-const format=document.createElement("td");
-format.textContent=item.type==="dir"?"-":ext(item.name);
+  const formatTd = document.createElement("td");
+  formatTd.textContent = item.type === "dir" ? "-" : ext(item.name);
 
-tr.appendChild(name);
-tr.appendChild(kind);
-tr.appendChild(format);
-return tr;
+  tr.appendChild(nameTd);
+  tr.appendChild(typeTd);
+  tr.appendChild(formatTd);
+  return tr;
 }
 
-// Filter on input
-search.oninput=()=>{
-const q=search.value.toLowerCase();
-let c=0;
-document.querySelectorAll("tr").forEach(r=>{
-const m=r.dataset.name.includes(q)||r.dataset.path.includes(q);
-r.style.display=m?"":"none";
-if(m)c++;
-});
-status.textContent=q?`${c} match(es)`:"";
-};
-
-// Init
-(async()=>{
-try{
-meta.textContent="Scanning repository...";
-const items=await walk(ROOT_PATH);
-items.sort((a,b)=>a.type!==b.type?a.type==="dir"?-1:1:a.path.localeCompare(b.path));
-items.forEach(i=>list.appendChild(row(i)));
-meta.textContent=`${items.length} items indexed`;
-}catch(e){
-meta.innerHTML="<span class='error'>Failed to load repo</span>";
-status.innerHTML=`<span class='error'>${e.message}</span>`;
-}
+// INIT
+(async function(){
+  try {
+    const meta = document.getElementById("meta");
+    meta.textContent = "Scanning repository…";
+    const data = await walk("");
+    data.sort((a,b)=>a.type!==b.type ? a.type==="dir"?-1:1 : a.path.localeCompare(b.path));
+    const list = document.getElementById("list");
+    data.forEach(item => list.appendChild(makeRow(item)));
+    meta.textContent = `Indexed ${data.length} items in Videos2727/Kings-Kingdom`;
+  }
+  catch (e){
+    document.getElementById("meta").innerHTML = "<span class='error'>Failed to read repository.</span>";
+    document.getElementById("status").innerHTML = `<span class="error">${e.message}</span>`;
+  }
 })();
 </script>
 
