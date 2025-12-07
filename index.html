@@ -813,7 +813,7 @@
           }
           ACTIVE_FILE_ELEMENT = item;
           item.classList.add("active");
-          previewFile(node); // PREVIEW ONLY, no download here
+          previewFile(node); // PREVIEW ONLY
         });
 
         li.appendChild(item);
@@ -822,11 +822,16 @@
       return li;
     }
 
-    // Build Microsoft Office viewer URL for Office files
+    // Microsoft Office viewer URL for Office files
     function getOfficeViewerUrl(rawUrl) {
       const encoded = encodeURIComponent(rawUrl);
-      // Using Microsoft Office Online embed viewer
       return `https://view.officeapps.live.com/op/embed.aspx?src=${encoded}`;
+    }
+
+    // Google Docs viewer URL for PDFs
+    function getPdfViewerUrl(rawUrl) {
+      const encoded = encodeURIComponent(rawUrl);
+      return `https://docs.google.com/gview?url=${encoded}&embedded=true`;
     }
 
     // Preview logic
@@ -841,7 +846,6 @@
             <div class="preview-path">${node.path}</div>
           </div>
           <div class="preview-actions">
-            <!-- This button downloads only when you click it, not when you click in the tree -->
             <a class="btn btn-primary" href="${rawUrl}" download>
               <span class="btn-icon">⬇</span> Download
             </a>
@@ -863,9 +867,16 @@
         if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext)) {
           previewBody.innerHTML = `<img src="${rawUrl}" alt="${node.name}" />`;
 
-        // PDF
+        // PDF -> Google viewer so it previews instead of forcing download
         } else if (ext === "pdf") {
-          previewBody.innerHTML = `<iframe src="${rawUrl}"></iframe>`;
+          const viewerUrl = getPdfViewerUrl(rawUrl);
+          previewBody.innerHTML = `
+            <iframe src="${viewerUrl}"></iframe>
+            <div class="note">
+              This PDF is rendered via Google Docs viewer.
+              If it doesn't load, try "Download" or "Open on GitHub".
+            </div>
+          `;
 
         // Video
         } else if (["mp4", "webm", "mov", "mkv", "avi"].includes(ext)) {
@@ -885,7 +896,7 @@
             </audio>
           `;
 
-        // Office docs: use Microsoft viewer so they PREVIEW instead of download
+        // Office docs (Word / PowerPoint / Excel) -> Microsoft viewer
         } else if (OFFICE_EXTENSIONS.includes(ext)) {
           const viewerUrl = getOfficeViewerUrl(rawUrl);
           previewBody.innerHTML = `
