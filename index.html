@@ -536,16 +536,14 @@
 
   <script>
     // --- CONFIG ---
-    // Fallbacks (used if auto-detection fails). Edit these to match your repo.
     const FALLBACK_OWNER = "Videos2727";
     const FALLBACK_REPO = "Kings-kingdom";
     const FALLBACK_BRANCH = "main"; // or "master"
 
-    // --- Detect repo from URL when on GitHub Pages (best effort) ---
+    // Detect repo from URL when on GitHub Pages (best effort)
     function detectRepoInfo() {
       const { hostname, pathname } = window.location;
 
-      // Default values:
       let owner = FALLBACK_OWNER;
       let repo = FALLBACK_REPO;
       let branch = FALLBACK_BRANCH;
@@ -554,21 +552,19 @@
         const pathParts = pathname.split("/").filter(Boolean);
 
         if (hostname.endsWith("github.io")) {
-          // username.github.io[/reponame]
           const hostParts = hostname.split(".");
           const username = hostParts[0];
           if (pathParts.length >= 1) {
             owner = username;
             repo = pathParts[0];
           } else {
-            // user site repo usually matches username.github.io
             owner = username;
             repo = `${username}.github.io`;
           }
         } else if (hostname === "localhost") {
-          // Local dev: just use fallbacks.
+          // local dev -> fallbacks
         } else {
-          // Other hosts (custom domains, etc.) -> rely on fallbacks.
+          // custom domain -> fallbacks
         }
       } catch (e) {
         console.warn("Could not auto-detect repo; using fallbacks.", e);
@@ -622,7 +618,7 @@
       return name.slice(idx + 1).toLowerCase();
     }
 
-    // --- which extensions are treated as text/code ---
+    // Extensions we treat as text/code
     const TEXT_EXTENSIONS = [
       "txt", "md", "markdown",
       "html", "htm",
@@ -636,6 +632,13 @@
       "sh", "bat", "ps1",
       "sql",
       "toml"
+    ];
+
+    // Office file extensions (Word, Excel, PowerPoint)
+    const OFFICE_EXTENSIONS = [
+      "doc", "docx",
+      "ppt", "pptx",
+      "xls", "xlsx"
     ];
 
     function isTextFileExt(ext) {
@@ -685,15 +688,16 @@
       )
         return "📜";
       if (["md", "markdown"].includes(ext)) return "📝";
+      if (OFFICE_EXTENSIONS.includes(ext)) return "📄";
       return "📄";
     }
 
-    // --- Build a tree structure from the Git tree array ---
+    // Build tree data from GitHub tree
     function buildTree(treeItems) {
       const root = { name: "", type: "dir", children: {} };
 
       treeItems
-        .filter((item) => item.type === "blob") // files only
+        .filter((item) => item.type === "blob")
         .forEach((item) => {
           const parts = item.path.split("/");
           let current = root;
@@ -809,7 +813,7 @@
           }
           ACTIVE_FILE_ELEMENT = item;
           item.classList.add("active");
-          previewFile(node);
+          previewFile(node); // PREVIEW ONLY, no download here
         });
 
         li.appendChild(item);
@@ -818,7 +822,14 @@
       return li;
     }
 
-    // --- NEW previewFile that treats docs properly ---
+    // Build Microsoft Office viewer URL for Office files
+    function getOfficeViewerUrl(rawUrl) {
+      const encoded = encodeURIComponent(rawUrl);
+      // Using Microsoft Office Online embed viewer
+      return `https://view.officeapps.live.com/op/embed.aspx?src=${encoded}`;
+    }
+
+    // Preview logic
     async function previewFile(node) {
       const rawUrl = getRawUrl(node.path);
 
@@ -830,6 +841,7 @@
             <div class="preview-path">${node.path}</div>
           </div>
           <div class="preview-actions">
+            <!-- This button downloads only when you click it, not when you click in the tree -->
             <a class="btn btn-primary" href="${rawUrl}" download>
               <span class="btn-icon">⬇</span> Download
             </a>
@@ -873,7 +885,18 @@
             </audio>
           `;
 
-        // TEXT / CODE files only
+        // Office docs: use Microsoft viewer so they PREVIEW instead of download
+        } else if (OFFICE_EXTENSIONS.includes(ext)) {
+          const viewerUrl = getOfficeViewerUrl(rawUrl);
+          previewBody.innerHTML = `
+            <iframe src="${viewerUrl}"></iframe>
+            <div class="note">
+              This document is rendered via Microsoft Office Online viewer.
+              If it doesn't load, try "Download" or "Open on GitHub".
+            </div>
+          `;
+
+        // TEXT / CODE files
         } else if (isTextFileExt(ext) || ext === "") {
           const res = await fetch(rawUrl);
           if (!res.ok) {
@@ -900,12 +923,14 @@
           `;
           previewBody.innerHTML = html;
 
-        // EVERYTHING ELSE (e.g. .docx, .pptx, .xlsx, zip, etc.)
+        // Everything else (zip, exe, etc.)
         } else {
           previewBody.innerHTML = `
-            <iframe src="${rawUrl}"></iframe>
-            <div class="note">
-              If this document does not display correctly, use "Download" or "Open on GitHub" to view it.
+            <div class="error">
+              ⚠️ This file type cannot be previewed inline.
+              <div class="note">
+                Use "Download" or "Open on GitHub" to view it.
+              </div>
             </div>
           `;
         }
@@ -970,7 +995,6 @@
       }
     }
 
-    // Kick things off
     document.addEventListener("DOMContentLoaded", fetchRepoTree);
   </script>
 </body>
