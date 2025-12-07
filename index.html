@@ -622,6 +622,26 @@
       return name.slice(idx + 1).toLowerCase();
     }
 
+    // --- which extensions are treated as text/code ---
+    const TEXT_EXTENSIONS = [
+      "txt", "md", "markdown",
+      "html", "htm",
+      "js", "ts", "jsx", "tsx",
+      "css",
+      "json",
+      "yml", "yaml",
+      "xml",
+      "csv",
+      "py", "java", "c", "cpp", "cs", "go", "rs", "rb", "php",
+      "sh", "bat", "ps1",
+      "sql",
+      "toml"
+    ];
+
+    function isTextFileExt(ext) {
+      return TEXT_EXTENSIONS.includes(ext);
+    }
+
     function escapeHtml(str) {
       return str
         .replace(/&/g, "&amp;")
@@ -798,6 +818,7 @@
       return li;
     }
 
+    // --- NEW previewFile that treats docs properly ---
     async function previewFile(node) {
       const rawUrl = getRawUrl(node.path);
 
@@ -826,10 +847,15 @@
       const ext = getFileExtension(node.name);
 
       try {
+        // Images
         if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext)) {
           previewBody.innerHTML = `<img src="${rawUrl}" alt="${node.name}" />`;
+
+        // PDF
         } else if (ext === "pdf") {
           previewBody.innerHTML = `<iframe src="${rawUrl}"></iframe>`;
+
+        // Video
         } else if (["mp4", "webm", "mov", "mkv", "avi"].includes(ext)) {
           previewBody.innerHTML = `
             <video controls>
@@ -837,22 +863,21 @@
               Your browser does not support the video tag.
             </video>
           `;
-        } else if (
-          ["mp3", "wav", "flac", "m4a", "ogg"].includes(ext)
-        ) {
+
+        // Audio
+        } else if (["mp3", "wav", "flac", "m4a", "ogg"].includes(ext)) {
           previewBody.innerHTML = `
             <audio controls>
               <source src="${rawUrl}">
               Your browser does not support the audio tag.
             </audio>
           `;
-        } else {
-          // Text / code preview
+
+        // TEXT / CODE files only
+        } else if (isTextFileExt(ext) || ext === "") {
           const res = await fetch(rawUrl);
           if (!res.ok) {
-            throw new Error(
-              `Unable to fetch file (HTTP ${res.status})`
-            );
+            throw new Error(`Unable to fetch file (HTTP ${res.status})`);
           }
           const text = await res.text();
           const maxChars = 200000;
@@ -874,6 +899,15 @@
             }
           `;
           previewBody.innerHTML = html;
+
+        // EVERYTHING ELSE (e.g. .docx, .pptx, .xlsx, zip, etc.)
+        } else {
+          previewBody.innerHTML = `
+            <iframe src="${rawUrl}"></iframe>
+            <div class="note">
+              If this document does not display correctly, use "Download" or "Open on GitHub" to view it.
+            </div>
+          `;
         }
       } catch (err) {
         console.error(err);
