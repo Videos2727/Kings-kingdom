@@ -214,6 +214,109 @@
       overflow: auto;
     }
 
+    /* Search bar + results */
+    .search-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 0;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-main);
+      font-size: 12px;
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: rgba(148, 163, 184, 0.7);
+    }
+
+    .search-select {
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-main);
+      font-size: 12px;
+      outline: none;
+    }
+
+    .search-results {
+      margin-bottom: 8px;
+      max-height: 140px;
+      overflow: auto;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      display: none; /* hidden until we have something */
+    }
+
+    .search-results-header {
+      padding: 4px 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .search-results-list {
+      list-style: none;
+      margin: 0;
+      padding: 4px 0;
+      font-size: 12px;
+    }
+
+    .search-result-item {
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .search-result-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .search-result-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+
+    .search-result-path {
+      font-size: 10px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 140px;
+    }
+
+    .search-result-ext {
+      font-size: 10px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .search-result-icon {
+      width: 16px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
     /* File tree styles */
     #file-tree {
       font-size: 13px;
@@ -502,6 +605,33 @@
           </div>
         </div>
         <div class="panel-body">
+          <div class="search-bar">
+            <input
+              id="search-input"
+              class="search-input"
+              type="text"
+              placeholder="Search files by name or path…"
+            />
+            <select id="search-type" class="search-select">
+              <option value="all">All types</option>
+              <option value="text">Text / Code</option>
+              <option value="pdf">PDF</option>
+              <option value="image">Image</option>
+              <option value="audio">Audio</option>
+              <option value="video">Video</option>
+              <option value="office">Office</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div id="search-results" class="search-results">
+            <div class="search-results-header">
+              <span id="search-results-label">Search results</span>
+              <span id="search-results-count"></span>
+            </div>
+            <ul id="search-results-list" class="search-results-list"></ul>
+          </div>
+
           <div id="file-tree"></div>
         </div>
       </aside>
@@ -587,10 +717,21 @@
     const previewContainer = document.getElementById("preview");
     const previewMeta = document.getElementById("preview-meta");
 
+    const searchInput = document.getElementById("search-input");
+    const searchType = document.getElementById("search-type");
+    const searchResults = document.getElementById("search-results");
+    const searchResultsList = document.getElementById("search-results-list");
+    const searchResultsCount = document.getElementById("search-results-count");
+
     repoLabelText.textContent = `${OWNER}/${REPO} · ${BRANCH}`;
 
     let ACTIVE_FILE_ELEMENT = null;
     let TOTAL_FILES = 0;
+
+    // Flat index of files for search
+    let FILE_INDEX = [];
+    // Map path -> tree DOM element (for highlighting when clicking search result)
+    const FILE_ELEMENT_BY_PATH = {};
 
     function setStatus(text, isOk = true) {
       statusText.textContent = text;
@@ -651,6 +792,21 @@
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;");
+    }
+
+    function getFileGroup(ext) {
+      if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext))
+        return "image";
+      if (ext === "pdf") return "pdf";
+      if (["mp4", "webm", "mov", "mkv", "avi"].includes(ext))
+        return "video";
+      if (["mp3", "wav", "flac", "m4a", "ogg"].includes(ext))
+        return "audio";
+      if (OFFICE_EXTENSIONS.includes(ext))
+        return "office";
+      if (isTextFileExt(ext) || ext === "")
+        return "text";
+      return "other";
     }
 
     function fileIconByExt(name) {
@@ -807,6 +963,9 @@
         item.appendChild(label);
         item.appendChild(meta);
 
+        // store element for highlighting from search
+        FILE_ELEMENT_BY_PATH[node.path] = item;
+
         item.addEventListener("click", () => {
           if (ACTIVE_FILE_ELEMENT) {
             ACTIVE_FILE_ELEMENT.classList.remove("active");
@@ -956,6 +1115,141 @@
       }
     }
 
+    // Build flat file index for search
+    function buildFileIndex(treeItems) {
+      FILE_INDEX = treeItems
+        .filter((item) => item.type === "blob")
+        .map((item) => {
+          const name = item.path.split("/").pop();
+          const ext = getFileExtension(name);
+          return {
+            path: item.path,
+            name,
+            ext,
+            group: getFileGroup(ext),
+          };
+        });
+    }
+
+    // Search + filter
+    function runSearch() {
+      const query = searchInput.value.trim().toLowerCase();
+      const typeFilter = searchType.value; // all, text, pdf, image, audio, video, office, other
+
+      if (!query && typeFilter === "all") {
+        // hide search results
+        searchResults.style.display = "none";
+        searchResultsList.innerHTML = "";
+        searchResultsCount.textContent = "";
+        return;
+      }
+
+      let results = FILE_INDEX;
+
+      if (typeFilter !== "all") {
+        results = results.filter((f) => f.group === typeFilter);
+      }
+
+      if (query) {
+        results = results.filter(
+          (f) =>
+            f.name.toLowerCase().includes(query) ||
+            f.path.toLowerCase().includes(query)
+        );
+      }
+
+      renderSearchResults(results);
+    }
+
+    function renderSearchResults(results) {
+      searchResultsList.innerHTML = "";
+
+      if (!results.length) {
+        searchResults.style.display = "block";
+        searchResultsCount.textContent = "0 results";
+        searchResultsList.innerHTML =
+          '<li class="search-result-item"><span class="search-result-name">No matching files</span></li>';
+        return;
+      }
+
+      searchResults.style.display = "block";
+      const maxShown = 50;
+      const shown = results.slice(0, maxShown);
+      searchResultsCount.textContent =
+        results.length > maxShown
+          ? `${results.length} results (showing ${maxShown})`
+          : `${results.length} result${results.length === 1 ? "" : "s"}`;
+
+      shown.forEach((file) => {
+        const li = document.createElement("li");
+        li.className = "search-result-item";
+        li.dataset.path = file.path;
+
+        const iconSpan = document.createElement("span");
+        iconSpan.className = "search-result-icon";
+        iconSpan.textContent = fileIconByExt(file.name);
+
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "search-result-name";
+        nameSpan.textContent = file.name;
+
+        const pathSpan = document.createElement("span");
+        pathSpan.className = "search-result-path";
+        pathSpan.textContent = file.path;
+
+        const extSpan = document.createElement("span");
+        extSpan.className = "search-result-ext";
+        extSpan.textContent = file.ext;
+
+        li.appendChild(iconSpan);
+        li.appendChild(nameSpan);
+        li.appendChild(pathSpan);
+        li.appendChild(extSpan);
+
+        li.addEventListener("click", () => {
+          // Highlight corresponding tree item if present
+          const el = FILE_ELEMENT_BY_PATH[file.path];
+          if (el) {
+            if (ACTIVE_FILE_ELEMENT) {
+              ACTIVE_FILE_ELEMENT.classList.remove("active");
+            }
+            ACTIVE_FILE_ELEMENT = el;
+            el.classList.add("active");
+            // Ensure its parent folders are open
+            openParents(el);
+          }
+
+          // Preview file directly
+          previewFile({
+            name: file.name,
+            path: file.path,
+            type: "file",
+          });
+        });
+
+        searchResultsList.appendChild(li);
+      });
+    }
+
+    // Open parent folders in tree for a given file element
+    function openParents(fileElement) {
+      let current = fileElement.parentElement; // li
+      while (current && current !== fileTreeContainer) {
+        if (current.tagName === "UL" && current.classList.contains("tree-children")) {
+          current.style.display = "block";
+          const parentLi = current.parentElement; // li containing folder item + children
+          if (parentLi) {
+            const folderHeader = parentLi.querySelector(".tree-item.folder");
+            const arrow = parentLi.querySelector(".tree-folder-arrow");
+            if (folderHeader && arrow) {
+              arrow.textContent = "▾";
+            }
+          }
+        }
+        current = current.parentElement;
+      }
+    }
+
     async function fetchRepoTree() {
       setStatus("Loading", true);
       treeSummary.textContent = "Calling GitHub API…";
@@ -977,6 +1271,9 @@
 
         TOTAL_FILES = tree.filter((i) => i.type === "blob").length;
         const root = buildTree(tree);
+
+        // Build search index
+        buildFileIndex(tree);
 
         renderTree(root);
         setStatus("Ready", true);
@@ -1006,6 +1303,16 @@
       }
     }
 
+    // Search event listeners
+    searchInput.addEventListener("input", () => {
+      runSearch();
+    });
+
+    searchType.addEventListener("change", () => {
+      runSearch();
+    });
+
+    // Kick things off
     document.addEventListener("DOMContentLoaded", fetchRepoTree);
   </script>
 </body>
