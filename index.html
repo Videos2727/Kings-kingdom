@@ -2,267 +2,942 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Kings Kingdom – Repository Index</title>
+  <title>Repo Browser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #020617;
-      --card: #0f172a;
-      --accent: #38bdf8;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
+      --bg: #0f172a;
+      --bg-elevated: #111827;
+      --bg-hover: #1f2937;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.12);
       --border: #1f2937;
-      --shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.6);
+      --radius-xl: 18px;
     }
-    * { box-sizing: border-box; }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 55%, #000 100%);
-      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 60%);
+      color: var(--text-main);
+      height: 100vh;
       display: flex;
-      justify-content: center;
-      padding: 24px 12px;
+      flex-direction: column;
     }
-    .page {
-      max-width: 960px;
-      width: 100%;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
+
     header {
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
+      gap: 12px;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to right,
+        rgba(15, 23, 42, 0.9),
+        rgba(15, 23, 42, 0.6)
+      );
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
       gap: 10px;
     }
-    .title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .logo {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: conic-gradient(from 210deg, #38bdf8, #6366f1, #a855f7, #38bdf8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #0b1120;
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
-    }
-    .subtitle {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
 
-    .folder {
-      margin-top: 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      overflow: hidden;
-    }
-    .folder-header {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      padding: 8px 10px;
-    }
-    .folder-icon {
-      background: linear-gradient(135deg, #facc15, #f97316);
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .folder-title { font-weight: 600; }
-    .folder-meta { font-size: 0.75rem; color: var(--muted); }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      font-size: 0.85rem;
-    }
-    th, td {
-      border-bottom: 1px solid var(--border);
-      padding: 6px;
-    }
-    th {
-      color: var(--muted);
-      font-size: 0.75rem;
-      text-align: left;
-    }
-    .file-main-link {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-    .file-path {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .tag {
-      font-size: 0.65rem;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 2px 6px;
+    .brand-icon {
+      width: 32px;
+      height: 32px;
       border-radius: 999px;
-      color: var(--muted);
+      background: radial-gradient(circle at 30% 20%, #60a5fa, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.7);
+      font-size: 18px;
     }
-    .status-bar {
-      text-align: right;
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 4px;
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
-    .error { color: #fecaca; }
-    footer {
+
+    .brand-title {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .repo-label {
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.2);
+    }
+
+    main {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      min-height: 0;
+    }
+
+    .app-shell {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+      max-width: 1320px;
+      margin: 0 auto;
+      flex: 1;
+    }
+
+    .panel {
+      background: radial-gradient(
+          circle at top,
+          rgba(30, 64, 175, 0.35),
+          transparent 40%
+        ),
+        var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .sidebar {
+      width: 320px;
+      max-width: 40%;
+      min-width: 260px;
+    }
+
+    .preview {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .panel-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-title::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      border-radius: 999px;
+      background: linear-gradient(to right, transparent, #60a5fa);
+      opacity: 0.8;
+    }
+
+    .panel-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .status-pill {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+    }
+
+    .panel-body {
+      flex: 1;
+      min-height: 0;
+      border-radius: calc(var(--radius-xl) - 6px);
+      padding: 10px;
+      background: radial-gradient(
+          circle at bottom,
+          rgba(15, 23, 42, 0.9),
+          rgba(15, 23, 42, 0.95)
+        ),
+        #020617;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      overflow: auto;
+    }
+
+    /* File tree styles */
+    #file-tree {
+      font-size: 13px;
+    }
+
+    .tree-root,
+    .tree-children {
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+    }
+
+    .tree-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      border-radius: 10px;
+      cursor: default;
+      user-select: none;
+      transition: background 0.12s ease, transform 0.05s ease;
+    }
+
+    .tree-item.folder {
+      cursor: pointer;
+    }
+
+    .tree-item.file {
+      cursor: pointer;
+    }
+
+    .tree-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .tree-item.file.active {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+    }
+
+    .tree-icon {
+      font-size: 14px;
+      width: 18px;
       text-align: center;
-      color: var(--muted);
-      margin-top: 12px;
-      font-size: 0.7rem;
+      flex-shrink: 0;
+      opacity: 0.85;
     }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+
+    .tree-label {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tree-folder-arrow {
+      font-size: 10px;
+      width: 10px;
+      text-align: center;
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .tree-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .tree-children {
+      margin-left: 14px;
+      border-left: 1px dashed rgba(55, 65, 81, 0.8);
+      padding-left: 8px;
+    }
+
+    /* Preview panel */
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      margin-bottom: 10px;
+    }
+
+    .preview-title-group {
+      min-width: 0;
+    }
+
+    .preview-title {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-path {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-main);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background 0.12s ease, transform 0.05s ease,
+        box-shadow 0.12s ease, border-color 0.12s ease;
+    }
+
+    .btn-primary {
+      border-color: var(--accent);
+      background: radial-gradient(circle at top, #2563eb, #1d4ed8);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn:hover {
+      background: var(--bg-hover);
+      transform: translateY(-0.5px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+    }
+
+    .btn-primary:hover {
+      background: radial-gradient(circle at top, #1d4ed8, #1d4ed8);
+    }
+
+    .btn-icon {
+      font-size: 13px;
+    }
+
+    .preview-body {
+      font-size: 13px;
+      line-height: 1.5;
+      min-height: 0;
+      height: calc(100% - 52px);
+      overflow: auto;
+    }
+
+    .preview-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+      background: #020617;
+    }
+
+    .preview-body img,
+    .preview-body video {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .preview-body audio {
+      width: 100%;
+    }
+
+    .code-preview {
+      background: #020617;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      overflow: auto;
+    }
+
+    .code-preview pre {
+      margin: 0;
+      white-space: pre;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+    }
+
+    .note {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .error {
+      color: #fca5a5;
+      font-size: 13px;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .hint-list {
+      margin-top: 6px;
+      padding-left: 18px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    footer {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 6px 8px 10px;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 900px) {
+      main {
+        padding: 12px;
+      }
+
+      .app-shell {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      .panel {
+        padding: 10px;
+      }
+
+      .preview-body {
+        height: auto;
+        max-height: 420px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div>
-        <div class="title">
-          <span class="logo">K</span>
-          <span>Kings Kingdom Resources</span>
-        </div>
-        <div class="subtitle">
-          Top-level files and folders from <strong>Videos2727/Kings-Kingdom</strong> (main branch).
+  <header>
+    <div class="brand">
+      <div class="brand-icon">∞</div>
+      <div class="brand-text">
+        <div class="brand-title">GitHub Repo Browser</div>
+        <div class="brand-subtitle">
+          Interactive file explorer with live previews
         </div>
       </div>
-    </header>
-
-    <div class="folder">
-      <div class="folder-header">
-        <div class="folder-icon">📁</div>
-        <div>
-          <div class="folder-title">Root of repository</div>
-          <div class="folder-meta" id="meta">Loading…</div>
-        </div>
-      </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Format</th>
-          </tr>
-        </thead>
-        <tbody id="list"></tbody>
-      </table>
     </div>
+    <div class="repo-label">
+      <span class="badge-dot"></span>
+      <span id="repo-label-text">Detecting repository…</span>
+    </div>
+  </header>
 
-    <div class="status-bar" id="status"></div>
+  <main>
+    <div class="app-shell">
+      <!-- Sidebar / file tree -->
+      <aside class="panel sidebar">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Repository Tree</div>
+            <div class="panel-meta" id="tree-summary">
+              Fetching file list…
+            </div>
+          </div>
+          <div class="status-pill">
+            <span class="status-dot" id="status-dot"></span>
+            <span id="status-text">Loading</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="file-tree"></div>
+        </div>
+      </aside>
 
-    <footer>
-      This page uses the public GitHub API to read the repository root.
-    </footer>
-  </div>
+      <!-- Preview panel -->
+      <section class="panel preview">
+        <div class="panel-header">
+          <div class="panel-title">Preview</div>
+          <div class="panel-meta" id="preview-meta">
+            Select a file from the tree to view its contents
+          </div>
+        </div>
+        <div class="panel-body" id="preview">
+          <div class="hint">
+            👋 Welcome!  
+            This interface will automatically list every file in your GitHub
+            repository. Click any file on the left to see a preview here.
+          </div>
+          <ul class="hint-list">
+            <li>Text &amp; code files show a syntax-friendly text preview.</li>
+            <li>Images, PDF, audio &amp; video open directly in the viewer.</li>
+            <li>Use “Download” or “Open on GitHub” for full access.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    Powered by the GitHub REST API · Built for GitHub Pages
+  </footer>
 
   <script>
-    const OWNER = "Videos2727";
-    const REPO = "Kings-kingdom";
-    const BRANCH = "main";
+    // --- CONFIG ---
+    // Fallbacks (used if auto-detection fails). Edit these to match your repo.
+    const FALLBACK_OWNER = "Videos2727";
+    const FALLBACK_REPO = "Kings-kingdom";
+    const FALLBACK_BRANCH = "main"; // or "master"
 
-    const metaEl = document.getElementById("meta");
-    const listEl = document.getElementById("list");
-    const statusEl = document.getElementById("status");
+    // --- Detect repo from URL when on GitHub Pages (best effort) ---
+    function detectRepoInfo() {
+      const { hostname, pathname } = window.location;
 
-    async function fetchRoot() {
-      const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/?ref=${BRANCH}`;
-      const response = await fetch(url);
-      if (!response.ok) {
-        let msg = `${response.status} ${response.statusText}`;
-        try {
-          const json = await response.json();
-          if (json.message) msg += " – " + json.message;
-        } catch {}
-        throw new Error(msg);
-      }
-      return response.json();
-    }
+      // Default values:
+      let owner = FALLBACK_OWNER;
+      let repo = FALLBACK_REPO;
+      let branch = FALLBACK_BRANCH;
 
-    function getExt(name) {
-      const idx = name.lastIndexOf(".");
-      if (idx === -1) return "-";
-      return name.slice(idx + 1).toUpperCase();
-    }
-
-    function makeRow(item) {
-      const tr = document.createElement("tr");
-
-      const nameTd = document.createElement("td");
-      const link = document.createElement("a");
-      link.className = "file-main-link";
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-
-      const icon = item.type === "dir" ? "📁" : "📄";
-      link.textContent = `${icon} ${item.name}`;
-
-      if (item.type === "dir") {
-        // Folders → GitHub tree view
-        link.href = `https://github.com/${OWNER}/${REPO}/tree/${BRANCH}/${item.path}`;
-      } else {
-        // Files → direct path (GitHub Pages will serve if file exists in pages site)
-        link.href = item.path;
-      }
-
-      nameTd.appendChild(link);
-
-      const pathDiv = document.createElement("div");
-      pathDiv.className = "file-path";
-      pathDiv.textContent = item.path;
-      nameTd.appendChild(pathDiv);
-
-      const typeTd = document.createElement("td");
-      typeTd.innerHTML = `<span class="tag">${item.type === "dir" ? "Folder" : "File"}</span>`;
-
-      const formatTd = document.createElement("td");
-      formatTd.textContent = item.type === "dir" ? "-" : getExt(item.name);
-
-      tr.appendChild(nameTd);
-      tr.appendChild(typeTd);
-      tr.appendChild(formatTd);
-
-      return tr;
-    }
-
-    (async function init() {
       try {
-        metaEl.textContent = "Contacting GitHub API…";
-        const items = await fetchRoot();
+        const pathParts = pathname.split("/").filter(Boolean);
 
-        // Basic sort: folders first, then files, then by name
-        items.sort((a, b) => {
-          if (a.type !== b.type) return a.type === "dir" ? -1 : 1;
-          return a.name.localeCompare(b.name);
+        if (hostname.endsWith("github.io")) {
+          // username.github.io[/reponame]
+          const hostParts = hostname.split(".");
+          const username = hostParts[0];
+          if (pathParts.length >= 1) {
+            owner = username;
+            repo = pathParts[0];
+          } else {
+            // user site repo usually matches username.github.io
+            owner = username;
+            repo = `${username}.github.io`;
+          }
+        } else if (hostname === "localhost") {
+          // Local dev: just use fallbacks.
+        } else {
+          // Other hosts (custom domains, etc.) -> rely on fallbacks.
+        }
+      } catch (e) {
+        console.warn("Could not auto-detect repo; using fallbacks.", e);
+      }
+
+      return { owner, repo, branch };
+    }
+
+    const repoInfo = detectRepoInfo();
+    const OWNER = repoInfo.owner;
+    const REPO = repoInfo.repo;
+    const BRANCH = repoInfo.branch;
+
+    // --- DOM refs ---
+    const repoLabelText = document.getElementById("repo-label-text");
+    const statusDot = document.getElementById("status-dot");
+    const statusText = document.getElementById("status-text");
+    const treeSummary = document.getElementById("tree-summary");
+    const fileTreeContainer = document.getElementById("file-tree");
+    const previewContainer = document.getElementById("preview");
+    const previewMeta = document.getElementById("preview-meta");
+
+    repoLabelText.textContent = `${OWNER}/${REPO} · ${BRANCH}`;
+
+    let ACTIVE_FILE_ELEMENT = null;
+    let TOTAL_FILES = 0;
+
+    function setStatus(text, isOk = true) {
+      statusText.textContent = text;
+      statusDot.style.backgroundColor = isOk ? "#22c55e" : "#f97316";
+      statusDot.style.boxShadow = isOk
+        ? "0 0 0 5px rgba(34, 197, 94, 0.2)"
+        : "0 0 0 5px rgba(249, 115, 22, 0.2)";
+    }
+
+    function getRawUrl(path) {
+      return `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${encodeURI(
+        path
+      )}`;
+    }
+
+    function getGithubUrl(path) {
+      return `https://github.com/${OWNER}/${REPO}/blob/${BRANCH}/${encodeURI(
+        path
+      )}`;
+    }
+
+    function getFileExtension(name) {
+      const idx = name.lastIndexOf(".");
+      if (idx === -1) return "";
+      return name.slice(idx + 1).toLowerCase();
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function fileIconByExt(name) {
+      const ext = getFileExtension(name);
+      if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext))
+        return "🖼️";
+      if (["pdf"].includes(ext)) return "📕";
+      if (["mp4", "webm", "mov", "mkv", "avi"].includes(ext)) return "🎬";
+      if (["mp3", "wav", "flac", "m4a", "ogg"].includes(ext)) return "🎵";
+      if (
+        [
+          "js",
+          "ts",
+          "jsx",
+          "tsx",
+          "json",
+          "html",
+          "css",
+          "py",
+          "java",
+          "c",
+          "cpp",
+          "cs",
+          "go",
+          "rs",
+          "rb",
+          "php",
+          "sh",
+          "bat",
+          "yml",
+          "yaml",
+          "toml",
+          "rs",
+        ].includes(ext)
+      )
+        return "📜";
+      if (["md", "markdown"].includes(ext)) return "📝";
+      return "📄";
+    }
+
+    // --- Build a tree structure from the Git tree array ---
+    function buildTree(treeItems) {
+      const root = { name: "", type: "dir", children: {} };
+
+      treeItems
+        .filter((item) => item.type === "blob") // files only
+        .forEach((item) => {
+          const parts = item.path.split("/");
+          let current = root;
+
+          parts.forEach((part, index) => {
+            const isFile = index === parts.length - 1;
+
+            if (isFile) {
+              if (!current.children[part]) {
+                current.children[part] = {
+                  name: part,
+                  type: "file",
+                  path: item.path,
+                };
+              }
+            } else {
+              if (!current.children[part]) {
+                current.children[part] = {
+                  name: part,
+                  type: "dir",
+                  children: {},
+                };
+              }
+              current = current.children[part];
+            }
+          });
         });
 
-        listEl.innerHTML = "";
-        items.forEach(item => {
-          if (item.name === "index.html") return; // avoid linking this page itself
-          listEl.appendChild(makeRow(item));
+      return root;
+    }
+
+    function sortNodes(nodes) {
+      return nodes.sort((a, b) => {
+        if (a.type === "dir" && b.type === "file") return -1;
+        if (a.type === "file" && b.type === "dir") return 1;
+        return a.name.localeCompare(b.name);
+      });
+    }
+
+    function renderTree(root) {
+      fileTreeContainer.innerHTML = "";
+      const ul = document.createElement("ul");
+      ul.className = "tree-root";
+
+      const nodes = sortNodes(Object.values(root.children));
+      nodes.forEach((node) => {
+        ul.appendChild(renderNode(node));
+      });
+
+      fileTreeContainer.appendChild(ul);
+    }
+
+    function renderNode(node) {
+      const li = document.createElement("li");
+
+      const item = document.createElement("div");
+      item.className = `tree-item ${node.type}`;
+
+      if (node.type === "dir") {
+        const arrow = document.createElement("span");
+        arrow.className = "tree-folder-arrow";
+        arrow.textContent = "▸";
+
+        const icon = document.createElement("span");
+        icon.className = "tree-icon";
+        icon.textContent = "📁";
+
+        const label = document.createElement("span");
+        label.className = "tree-label";
+        label.textContent = node.name;
+
+        item.appendChild(arrow);
+        item.appendChild(icon);
+        item.appendChild(label);
+
+        const childrenUl = document.createElement("ul");
+        childrenUl.className = "tree-children";
+        childrenUl.style.display = "none";
+
+        const children = sortNodes(Object.values(node.children));
+        children.forEach((child) => {
+          childrenUl.appendChild(renderNode(child));
         });
 
-        metaEl.textConten
+        item.addEventListener("click", () => {
+          const isOpen = childrenUl.style.display !== "none";
+          childrenUl.style.display = isOpen ? "none" : "block";
+          arrow.textContent = isOpen ? "▸" : "▾";
+        });
+
+        li.appendChild(item);
+        li.appendChild(childrenUl);
+      } else {
+        const icon = document.createElement("span");
+        icon.className = "tree-icon";
+        icon.textContent = fileIconByExt(node.name);
+
+        const label = document.createElement("span");
+        label.className = "tree-label";
+        label.textContent = node.name;
+
+        const meta = document.createElement("span");
+        meta.className = "tree-meta";
+        meta.textContent = getFileExtension(node.name);
+
+        item.appendChild(icon);
+        item.appendChild(label);
+        item.appendChild(meta);
+
+        item.addEventListener("click", () => {
+          if (ACTIVE_FILE_ELEMENT) {
+            ACTIVE_FILE_ELEMENT.classList.remove("active");
+          }
+          ACTIVE_FILE_ELEMENT = item;
+          item.classList.add("active");
+          previewFile(node);
+        });
+
+        li.appendChild(item);
+      }
+
+      return li;
+    }
+
+    async function previewFile(node) {
+      const rawUrl = getRawUrl(node.path);
+
+      previewMeta.textContent = node.path;
+      previewContainer.innerHTML = `
+        <div class="preview-header">
+          <div class="preview-title-group">
+            <div class="preview-title">${node.name}</div>
+            <div class="preview-path">${node.path}</div>
+          </div>
+          <div class="preview-actions">
+            <a class="btn btn-primary" href="${rawUrl}" download>
+              <span class="btn-icon">⬇</span> Download
+            </a>
+            <a class="btn" href="${getGithubUrl(node.path)}" target="_blank" rel="noopener">
+              <span class="btn-icon">↗</span> Open on GitHub
+            </a>
+          </div>
+        </div>
+        <div class="preview-body">
+          <div class="hint">Loading preview…</div>
+        </div>
+      `;
+
+      const previewBody = previewContainer.querySelector(".preview-body");
+      const ext = getFileExtension(node.name);
+
+      try {
+        if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext)) {
+          previewBody.innerHTML = `<img src="${rawUrl}" alt="${node.name}" />`;
+        } else if (ext === "pdf") {
+          previewBody.innerHTML = `<iframe src="${rawUrl}"></iframe>`;
+        } else if (["mp4", "webm", "mov", "mkv", "avi"].includes(ext)) {
+          previewBody.innerHTML = `
+            <video controls>
+              <source src="${rawUrl}" type="video/${ext === "mkv" ? "mp4" : ext}">
+              Your browser does not support the video tag.
+            </video>
+          `;
+        } else if (
+          ["mp3", "wav", "flac", "m4a", "ogg"].includes(ext)
+        ) {
+          previewBody.innerHTML = `
+            <audio controls>
+              <source src="${rawUrl}">
+              Your browser does not support the audio tag.
+            </audio>
+          `;
+        } else {
+          // Text / code preview
+          const res = await fetch(rawUrl);
+          if (!res.ok) {
+            throw new Error(
+              `Unable to fetch file (HTTP ${res.status})`
+            );
+          }
+          const text = await res.text();
+          const maxChars = 200000;
+          let truncated = false;
+          let display = text;
+          if (text.length > maxChars) {
+            display = text.slice(0, maxChars);
+            truncated = true;
+          }
+
+          const html = `
+            <div class="code-preview">
+              <pre><code>${escapeHtml(display)}</code></pre>
+            </div>
+            ${
+              truncated
+                ? '<div class="note">Preview truncated for large file. Use "Download" or "Open on GitHub" to view the full contents.</div>'
+                : ""
+            }
+          `;
+          previewBody.innerHTML = html;
+        }
+      } catch (err) {
+        console.error(err);
+        previewBody.innerHTML = `
+          <div class="error">
+            ⚠️ Could not render preview. You can still download or open the file on GitHub.
+            <div class="note">${escapeHtml(err.message || String(err))}</div>
+          </div>
+        `;
+      }
+    }
+
+    async function fetchRepoTree() {
+      setStatus("Loading", true);
+      treeSummary.textContent = "Calling GitHub API…";
+
+      const apiUrl = `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${encodeURIComponent(
+        BRANCH
+      )}?recursive=1`;
+
+      try {
+        const res = await fetch(apiUrl);
+        if (!res.ok) {
+          throw new Error(
+            `GitHub API error (HTTP ${res.status}). Make sure the repo & branch exist and are public.`
+          );
+        }
+
+        const data = await res.json();
+        const tree = data.tree || [];
+
+        TOTAL_FILES = tree.filter((i) => i.type === "blob").length;
+        const root = buildTree(tree);
+
+        renderTree(root);
+        setStatus("Ready", true);
+        treeSummary.textContent = `${TOTAL_FILES} files listed via GitHub API${
+          data.truncated ? " (truncated by GitHub)" : ""
+        }`;
+      } catch (err) {
+        console.error(err);
+        setStatus("Error", false);
+        treeSummary.textContent = "Could not load repository tree.";
+        fileTreeContainer.innerHTML = `
+          <div class="error">
+            ⚠️ Failed to fetch repository tree.
+            <div class="note">
+              ${escapeHtml(
+                err.message || String(err)
+              )}<br/><br/>
+              Tips:
+              <ul class="hint-list">
+                <li>Check OWNER, REPO and BRANCH at the top of the script.</li>
+                <li>Ensure the repository is public (or use a token in a private deployment).</li>
+                <li>Confirm GitHub Pages is serving this file.</li>
+              </ul>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Kick things off
+    document.addEventListener("DOMContentLoaded", fetchRepoTree);
+  </script>
+</body>
+</html>
