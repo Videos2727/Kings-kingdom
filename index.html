@@ -256,7 +256,7 @@
       border-radius: 10px;
       background: rgba(15, 23, 42, 0.7);
       border: 1px solid rgba(31, 41, 55, 0.9);
-      display: none; /* hidden until we have something */
+      display: none;
     }
 
     .search-results-header {
@@ -653,6 +653,7 @@
           <ul class="hint-list">
             <li>Text &amp; code files show a syntax-friendly text preview.</li>
             <li>Images, PDF, audio &amp; video open directly in the viewer.</li>
+            <li>Office &amp; .url shortcut files open via online viewers or links.</li>
             <li>Use “Download” or “Open on GitHub” for full access.</li>
           </ul>
         </div>
@@ -670,7 +671,6 @@
     const FALLBACK_REPO = "Kings-kingdom";
     const FALLBACK_BRANCH = "main"; // or "master"
 
-    // Detect repo from URL when on GitHub Pages (best effort)
     function detectRepoInfo() {
       const { hostname, pathname } = window.location;
 
@@ -692,7 +692,7 @@
             repo = `${username}.github.io`;
           }
         } else if (hostname === "localhost") {
-          // local dev -> fallbacks
+          // local dev
         } else {
           // custom domain -> fallbacks
         }
@@ -730,7 +730,7 @@
 
     // Flat index of files for search
     let FILE_INDEX = [];
-    // Map path -> tree DOM element (for highlighting when clicking search result)
+    // Map path -> tree DOM element for highlighting
     const FILE_ELEMENT_BY_PATH = {};
 
     function setStatus(text, isOk = true) {
@@ -806,6 +806,8 @@
         return "office";
       if (isTextFileExt(ext) || ext === "")
         return "text";
+      if (ext === "url")
+        return "other"; // treat URL shortcuts as "other" for filters
       return "other";
     }
 
@@ -845,10 +847,11 @@
         return "📜";
       if (["md", "markdown"].includes(ext)) return "📝";
       if (OFFICE_EXTENSIONS.includes(ext)) return "📄";
+      if (ext === "url") return "🔗";
       return "📄";
     }
 
-    // Build tree data from GitHub tree
+    // Build tree structure from GitHub tree
     function buildTree(treeItems) {
       const root = { name: "", type: "dir", children: {} };
 
@@ -972,7 +975,7 @@
           }
           ACTIVE_FILE_ELEMENT = item;
           item.classList.add("active");
-          previewFile(node); // PREVIEW ONLY
+          previewFile(node);
         });
 
         li.appendChild(item);
@@ -981,7 +984,7 @@
       return li;
     }
 
-    // Microsoft Office viewer URL for Office files
+    // Microsoft Office viewer URL
     function getOfficeViewerUrl(rawUrl) {
       const encoded = encodeURIComponent(rawUrl);
       return `https://view.officeapps.live.com/op/embed.aspx?src=${encoded}`;
@@ -1022,11 +1025,40 @@
       const ext = getFileExtension(node.name);
 
       try {
+        // URL shortcut files (.url)
+        if (ext === "url") {
+          const res = await fetch(rawUrl);
+          if (!res.ok) {
+            throw new Error(`Unable to fetch URL file (HTTP ${res.status})`);
+          }
+          const text = await res.text();
+          const match = text.match(/URL=(.*)/i);
+          const link = match ? match[1].trim() : null;
+
+          if (link) {
+            previewBody.innerHTML = `
+              <div class="hint">This is a URL shortcut file.</div>
+              <a class="btn btn-primary" href="${link}" target="_blank" rel="noopener">
+                <span class="btn-icon">↗</span> Open Link
+              </a>
+              <div class="note">${escapeHtml(link)}</div>
+            `;
+          } else {
+            previewBody.innerHTML = `
+              <div class="error">
+                Could not read URL from this .url file.
+                <div class="note">Make sure it contains a line like:<br/>URL=https://example.com</div>
+              </div>
+            `;
+          }
+          return;
+        }
+
         // Images
         if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext)) {
           previewBody.innerHTML = `<img src="${rawUrl}" alt="${node.name}" />`;
 
-        // PDF -> Google viewer so it previews instead of forcing download
+        // PDF -> Google viewer
         } else if (ext === "pdf") {
           const viewerUrl = getPdfViewerUrl(rawUrl);
           previewBody.innerHTML = `
@@ -1055,7 +1087,7 @@
             </audio>
           `;
 
-        // Office docs (Word / PowerPoint / Excel) -> Microsoft viewer
+        // Office docs
         } else if (OFFICE_EXTENSIONS.includes(ext)) {
           const viewerUrl = getOfficeViewerUrl(rawUrl);
           previewBody.innerHTML = `
@@ -1137,7 +1169,6 @@
       const typeFilter = searchType.value; // all, text, pdf, image, audio, video, office, other
 
       if (!query && typeFilter === "all") {
-        // hide search results
         searchResults.style.display = "none";
         searchResultsList.innerHTML = "";
         searchResultsCount.textContent = "";
@@ -1207,7 +1238,6 @@
         li.appendChild(extSpan);
 
         li.addEventListener("click", () => {
-          // Highlight corresponding tree item if present
           const el = FILE_ELEMENT_BY_PATH[file.path];
           if (el) {
             if (ACTIVE_FILE_ELEMENT) {
@@ -1215,11 +1245,9 @@
             }
             ACTIVE_FILE_ELEMENT = el;
             el.classList.add("active");
-            // Ensure its parent folders are open
             openParents(el);
           }
 
-          // Preview file directly
           previewFile({
             name: file.name,
             path: file.path,
@@ -1231,17 +1259,15 @@
       });
     }
 
-    // Open parent folders in tree for a given file element
     function openParents(fileElement) {
       let current = fileElement.parentElement; // li
       while (current && current !== fileTreeContainer) {
         if (current.tagName === "UL" && current.classList.contains("tree-children")) {
           current.style.display = "block";
-          const parentLi = current.parentElement; // li containing folder item + children
+          const parentLi = current.parentElement;
           if (parentLi) {
-            const folderHeader = parentLi.querySelector(".tree-item.folder");
             const arrow = parentLi.querySelector(".tree-folder-arrow");
-            if (folderHeader && arrow) {
+            if (arrow) {
               arrow.textContent = "▾";
             }
           }
@@ -1272,9 +1298,7 @@
         TOTAL_FILES = tree.filter((i) => i.type === "blob").length;
         const root = buildTree(tree);
 
-        // Build search index
         buildFileIndex(tree);
-
         renderTree(root);
         setStatus("Ready", true);
         treeSummary.textContent = `${TOTAL_FILES} files listed via GitHub API${
@@ -1303,7 +1327,6 @@
       }
     }
 
-    // Search event listeners
     searchInput.addEventListener("input", () => {
       runSearch();
     });
@@ -1312,7 +1335,6 @@
       runSearch();
     });
 
-    // Kick things off
     document.addEventListener("DOMContentLoaded", fetchRepoTree);
   </script>
 </body>
