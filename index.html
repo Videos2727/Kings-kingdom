@@ -214,7 +214,6 @@
       overflow: auto;
     }
 
-    /* Search bar + results */
     .search-bar {
       display: flex;
       gap: 6px;
@@ -317,7 +316,6 @@
       flex-shrink: 0;
     }
 
-    /* File tree styles */
     #file-tree {
       font-size: 13px;
     }
@@ -395,7 +393,6 @@
       padding-left: 8px;
     }
 
-    /* Preview panel */
     .preview-header {
       display: flex;
       align-items: center;
@@ -448,6 +445,12 @@
       cursor: pointer;
       transition: background 0.12s ease, transform 0.05s ease,
         box-shadow 0.12s ease, border-color 0.12s ease;
+    }
+
+    button.btn {
+      appearance: none;
+      -webkit-appearance: none;
+      font-family: inherit;
     }
 
     .btn-primary {
@@ -544,7 +547,6 @@
       padding: 6px 8px 10px;
     }
 
-    /* Responsive tweaks */
     @media (max-width: 900px) {
       main {
         padding: 12px;
@@ -590,7 +592,6 @@
 
   <main>
     <div class="app-shell">
-      <!-- Sidebar / file tree -->
       <aside class="panel sidebar">
         <div class="panel-header">
           <div>
@@ -636,7 +637,6 @@
         </div>
       </aside>
 
-      <!-- Preview panel -->
       <section class="panel preview">
         <div class="panel-header">
           <div class="panel-title">Preview</div>
@@ -646,7 +646,7 @@
         </div>
         <div class="panel-body" id="preview">
           <div class="hint">
-            👋 Welcome!  
+            👋 Welcome!
             This interface will automatically list every file in your GitHub
             repository. Click any file on the left to see a preview here.
           </div>
@@ -654,7 +654,7 @@
             <li>Text &amp; code files show a syntax-friendly text preview.</li>
             <li>Images, PDF, audio &amp; video open directly in the viewer.</li>
             <li>Office &amp; .url shortcut files open via online viewers or links.</li>
-            <li>Use “Download” or “Open on GitHub” for full access.</li>
+            <li>Use “Open File”, “Copy Link”, or “Open on GitHub” for full access.</li>
           </ul>
         </div>
       </section>
@@ -666,10 +666,9 @@
   </footer>
 
   <script>
-    // --- CONFIG ---
     const FALLBACK_OWNER = "Videos2727";
     const FALLBACK_REPO = "Kings-kingdom";
-    const FALLBACK_BRANCH = "main"; // or "master"
+    const FALLBACK_BRANCH = "main";
 
     function detectRepoInfo() {
       const { hostname, pathname } = window.location;
@@ -708,7 +707,6 @@
     const REPO = repoInfo.repo;
     const BRANCH = repoInfo.branch;
 
-    // --- DOM refs ---
     const repoLabelText = document.getElementById("repo-label-text");
     const statusDot = document.getElementById("status-dot");
     const statusText = document.getElementById("status-text");
@@ -727,10 +725,7 @@
 
     let ACTIVE_FILE_ELEMENT = null;
     let TOTAL_FILES = 0;
-
-    // Flat index of files for search
     let FILE_INDEX = [];
-    // Map path -> tree DOM element for highlighting
     const FILE_ELEMENT_BY_PATH = {};
 
     function setStatus(text, isOk = true) {
@@ -742,15 +737,11 @@
     }
 
     function getRawUrl(path) {
-      return `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${encodeURI(
-        path
-      )}`;
+      return `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${encodeURI(path)}`;
     }
 
     function getGithubUrl(path) {
-      return `https://github.com/${OWNER}/${REPO}/blob/${BRANCH}/${encodeURI(
-        path
-      )}`;
+      return `https://github.com/${OWNER}/${REPO}/blob/${BRANCH}/${encodeURI(path)}`;
     }
 
     function getFileExtension(name) {
@@ -759,7 +750,6 @@
       return name.slice(idx + 1).toLowerCase();
     }
 
-    // Extensions we treat as text/code
     const TEXT_EXTENSIONS = [
       "txt", "md", "markdown",
       "html", "htm",
@@ -775,7 +765,6 @@
       "toml"
     ];
 
-    // Office file extensions (Word, Excel, PowerPoint)
     const OFFICE_EXTENSIONS = [
       "doc", "docx",
       "ppt", "pptx",
@@ -795,63 +784,42 @@
     }
 
     function getFileGroup(ext) {
-      if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext))
-        return "image";
+      if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext)) return "image";
       if (ext === "pdf") return "pdf";
-      if (["mp4", "webm", "mov", "mkv", "avi"].includes(ext))
-        return "video";
-      if (["mp3", "wav", "flac", "m4a", "ogg"].includes(ext))
-        return "audio";
-      if (OFFICE_EXTENSIONS.includes(ext))
-        return "office";
-      if (isTextFileExt(ext) || ext === "")
-        return "text";
-      if (ext === "url")
-        return "other"; // treat URL shortcuts as "other" for filters
+      if (["mp4", "webm", "mov", "mkv", "avi"].includes(ext)) return "video";
+      if (["mp3", "wav", "flac", "m4a", "ogg"].includes(ext)) return "audio";
+      if (OFFICE_EXTENSIONS.includes(ext)) return "office";
+      if (isTextFileExt(ext) || ext === "") return "text";
+      if (ext === "url") return "other";
       return "other";
     }
 
     function fileIconByExt(name) {
       const ext = getFileExtension(name);
-      if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext))
-        return "🖼️";
+      if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext)) return "🖼️";
       if (["pdf"].includes(ext)) return "📕";
       if (["mp4", "webm", "mov", "mkv", "avi"].includes(ext)) return "🎬";
       if (["mp3", "wav", "flac", "m4a", "ogg"].includes(ext)) return "🎵";
-      if (
-        [
-          "js",
-          "ts",
-          "jsx",
-          "tsx",
-          "json",
-          "html",
-          "css",
-          "py",
-          "java",
-          "c",
-          "cpp",
-          "cs",
-          "go",
-          "rs",
-          "rb",
-          "php",
-          "sh",
-          "bat",
-          "yml",
-          "yaml",
-          "toml",
-          "rs",
-        ].includes(ext)
-      )
-        return "📜";
+      if ([
+        "js", "ts", "jsx", "tsx", "json", "html", "css", "py", "java", "c",
+        "cpp", "cs", "go", "rs", "rb", "php", "sh", "bat", "yml", "yaml", "toml"
+      ].includes(ext)) return "📜";
       if (["md", "markdown"].includes(ext)) return "📝";
       if (OFFICE_EXTENSIONS.includes(ext)) return "📄";
       if (ext === "url") return "🔗";
       return "📄";
     }
 
-    // Build tree structure from GitHub tree
+    function copyShareLink(link) {
+      navigator.clipboard.writeText(link)
+        .then(() => {
+          alert("Shareable link copied to clipboard.");
+        })
+        .catch(() => {
+          prompt("Copy this link:", link);
+        });
+    }
+
     function buildTree(treeItems) {
       const root = { name: "", type: "dir", children: {} };
 
@@ -911,7 +879,6 @@
 
     function renderNode(node) {
       const li = document.createElement("li");
-
       const item = document.createElement("div");
       item.className = `tree-item ${node.type}`;
 
@@ -966,7 +933,6 @@
         item.appendChild(label);
         item.appendChild(meta);
 
-        // store element for highlighting from search
         FILE_ELEMENT_BY_PATH[node.path] = item;
 
         item.addEventListener("click", () => {
@@ -984,19 +950,16 @@
       return li;
     }
 
-    // Microsoft Office viewer URL
     function getOfficeViewerUrl(rawUrl) {
       const encoded = encodeURIComponent(rawUrl);
       return `https://view.officeapps.live.com/op/embed.aspx?src=${encoded}`;
     }
 
-    // Google Docs viewer URL for PDFs
     function getPdfViewerUrl(rawUrl) {
       const encoded = encodeURIComponent(rawUrl);
       return `https://docs.google.com/gview?url=${encoded}&embedded=true`;
     }
 
-    // Preview logic
     async function previewFile(node) {
       const rawUrl = getRawUrl(node.path);
 
@@ -1008,9 +971,12 @@
             <div class="preview-path">${node.path}</div>
           </div>
           <div class="preview-actions">
-            <a class="btn btn-primary" href="${rawUrl}" download>
-              <span class="btn-icon">⬇</span> Download
+            <a class="btn btn-primary" href="${rawUrl}" target="_blank" rel="noopener">
+              <span class="btn-icon">🔗</span> Open File
             </a>
+            <button class="btn" type="button" onclick="copyShareLink('${rawUrl.replace(/'/g, "\\'")}')">
+              <span class="btn-icon">📋</span> Copy Link
+            </button>
             <a class="btn" href="${getGithubUrl(node.path)}" target="_blank" rel="noopener">
               <span class="btn-icon">↗</span> Open on GitHub
             </a>
@@ -1025,11 +991,10 @@
       const ext = getFileExtension(node.name);
 
       try {
-        // URL shortcut files (.url)
         if (ext === "url") {
           const res = await fetch(rawUrl);
           if (!res.ok) {
-            throw new Error(`Unable to fetch URL file (HTTP ${res.status})`);
+            throw new Error(\`Unable to fetch URL file (HTTP \${res.status})\`);
           }
           const text = await res.text();
           const match = text.match(/URL=(.*)/i);
@@ -1041,6 +1006,9 @@
               <a class="btn btn-primary" href="${link}" target="_blank" rel="noopener">
                 <span class="btn-icon">↗</span> Open Link
               </a>
+              <button class="btn" type="button" onclick="copyShareLink('${link.replace(/'/g, "\\'")}')">
+                <span class="btn-icon">📋</span> Copy Link
+              </button>
               <div class="note">${escapeHtml(link)}</div>
             `;
           } else {
@@ -1054,22 +1022,19 @@
           return;
         }
 
-        // Images
         if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext)) {
           previewBody.innerHTML = `<img src="${rawUrl}" alt="${node.name}" />`;
 
-        // PDF -> Google viewer
         } else if (ext === "pdf") {
           const viewerUrl = getPdfViewerUrl(rawUrl);
           previewBody.innerHTML = `
             <iframe src="${viewerUrl}"></iframe>
             <div class="note">
               This PDF is rendered via Google Docs viewer.
-              If it doesn't load, try "Download" or "Open on GitHub".
+              If it doesn't load, try "Open File" or "Open on GitHub".
             </div>
           `;
 
-        // Video
         } else if (["mp4", "webm", "mov", "mkv", "avi"].includes(ext)) {
           previewBody.innerHTML = `
             <video controls>
@@ -1078,7 +1043,6 @@
             </video>
           `;
 
-        // Audio
         } else if (["mp3", "wav", "flac", "m4a", "ogg"].includes(ext)) {
           previewBody.innerHTML = `
             <audio controls>
@@ -1087,51 +1051,48 @@
             </audio>
           `;
 
-        // Office docs
         } else if (OFFICE_EXTENSIONS.includes(ext)) {
           const viewerUrl = getOfficeViewerUrl(rawUrl);
           previewBody.innerHTML = `
             <iframe src="${viewerUrl}"></iframe>
             <div class="note">
               This document is rendered via Microsoft Office Online viewer.
-              If it doesn't load, try "Download" or "Open on GitHub".
+              If it doesn't load, try "Open File" or "Open on GitHub".
             </div>
           `;
 
-        // TEXT / CODE files
         } else if (isTextFileExt(ext) || ext === "") {
           const res = await fetch(rawUrl);
           if (!res.ok) {
-            throw new Error(`Unable to fetch file (HTTP ${res.status})`);
+            throw new Error(\`Unable to fetch file (HTTP \${res.status})\`);
           }
           const text = await res.text();
           const maxChars = 200000;
           let truncated = false;
           let display = text;
+
           if (text.length > maxChars) {
             display = text.slice(0, maxChars);
             truncated = true;
           }
 
-          const html = `
+          previewBody.innerHTML = `
             <div class="code-preview">
               <pre><code>${escapeHtml(display)}</code></pre>
             </div>
             ${
               truncated
-                ? '<div class="note">Preview truncated for large file. Use "Download" or "Open on GitHub" to view the full contents.</div>'
+                ? '<div class="note">Preview truncated for large file. Use "Open File" or "Open on GitHub" to view the full contents.</div>'
                 : ""
             }
           `;
-          previewBody.innerHTML = html;
 
-        // Everything else (zip, exe, etc.)
         } else {
           previewBody.innerHTML = `
             <div class="error">
               ⚠️ This file type cannot be previewed inline.
               <div class="note">
-                Use "Download" or "Open on GitHub" to view it.
+                Use "Open File" or "Open on GitHub" to view it.
               </div>
             </div>
           `;
@@ -1140,14 +1101,13 @@
         console.error(err);
         previewBody.innerHTML = `
           <div class="error">
-            ⚠️ Could not render preview. You can still download or open the file on GitHub.
+            ⚠️ Could not render preview. You can still open the file or view it on GitHub.
             <div class="note">${escapeHtml(err.message || String(err))}</div>
           </div>
         `;
       }
     }
 
-    // Build flat file index for search
     function buildFileIndex(treeItems) {
       FILE_INDEX = treeItems
         .filter((item) => item.type === "blob")
@@ -1163,10 +1123,9 @@
         });
     }
 
-    // Search + filter
     function runSearch() {
       const query = searchInput.value.trim().toLowerCase();
-      const typeFilter = searchType.value; // all, text, pdf, image, audio, video, office, other
+      const typeFilter = searchType.value;
 
       if (!query && typeFilter === "all") {
         searchResults.style.display = "none";
@@ -1260,7 +1219,7 @@
     }
 
     function openParents(fileElement) {
-      let current = fileElement.parentElement; // li
+      let current = fileElement.parentElement;
       while (current && current !== fileTreeContainer) {
         if (current.tagName === "UL" && current.classList.contains("tree-children")) {
           current.style.display = "block";
@@ -1312,13 +1271,11 @@
           <div class="error">
             ⚠️ Failed to fetch repository tree.
             <div class="note">
-              ${escapeHtml(
-                err.message || String(err)
-              )}<br/><br/>
+              ${escapeHtml(err.message || String(err))}<br/><br/>
               Tips:
               <ul class="hint-list">
                 <li>Check OWNER, REPO and BRANCH at the top of the script.</li>
-                <li>Ensure the repository is public (or use a token in a private deployment).</li>
+                <li>Ensure the repository is public.</li>
                 <li>Confirm GitHub Pages is serving this file.</li>
               </ul>
             </div>
@@ -1327,14 +1284,8 @@
       }
     }
 
-    searchInput.addEventListener("input", () => {
-      runSearch();
-    });
-
-    searchType.addEventListener("change", () => {
-      runSearch();
-    });
-
+    searchInput.addEventListener("input", runSearch);
+    searchType.addEventListener("change", runSearch);
     document.addEventListener("DOMContentLoaded", fetchRepoTree);
   </script>
 </body>
