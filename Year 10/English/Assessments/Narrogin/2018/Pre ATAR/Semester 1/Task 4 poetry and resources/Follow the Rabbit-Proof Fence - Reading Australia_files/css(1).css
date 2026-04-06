@@ -1,0 +1,12 @@
+@font-face {
+	font-family: Sintony;
+	src: local("Sintony"), url(https://fonts.gstatic.com/s/sintony/v5/XoHm2YDqR7-98cVUETMtvA.woff) format("woff");
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: Sintony;
+	src: local("Sintony Bold"), local("Sintony-Bold"), url(https://fonts.gstatic.com/s/sintony/v5/XoHj2YDqR7-98cVUGYgIr9AJlQ.woff) format("woff");
+	font-weight: 700;
+	font-style: normal;
+}

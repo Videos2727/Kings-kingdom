@@ -1,0 +1,180 @@
+body {
+	color: rgb(68, 68, 68); font-family: "Proxima Nova",sans-serif; -webkit-font-smoothing: antialiased;
+}
+h1 {
+	line-height: 1; font-family: "Proxima Nova",sans-serif; font-weight: bold;
+}
+h2 {
+	line-height: 1; font-family: "Proxima Nova",sans-serif; font-weight: bold;
+}
+h3 {
+	line-height: 1; font-family: "Proxima Nova",sans-serif; font-weight: bold;
+}
+h4 {
+	line-height: 1; font-family: "Proxima Nova",sans-serif; font-weight: bold;
+}
+h5 {
+	line-height: 1; font-family: "Proxima Nova",sans-serif; font-weight: bold;
+}
+h6 {
+	line-height: 1; font-family: "Proxima Nova",sans-serif; font-weight: bold;
+}
+h1 {
+	font-size: 3em; margin-top: 0.75em; margin-bottom: 0.25em;
+}
+h1.pageTitle {
+	top: -0.25em; margin-top: 0px; margin-bottom: 0.2em; position: relative;
+}
+h2 {
+	text-transform: uppercase; font-size: 1.2em; margin-top: 0px; margin-bottom: 0.75em;
+}
+h3 {
+	font-size: 1.2em; font-weight: normal; margin-top: 0em; margin-bottom: 0.5em;
+}
+h4 {
+	color: rgb(145, 145, 145); text-transform: uppercase; font-size: 1.1em; font-weight: normal; margin-top: 0px; margin-bottom: 0.5em;
+}
+h5 {
+	font-size: 1.1em; margin-top: 0px; margin-bottom: 0.5em;
+}
+h6 {
+	font-size: 1em; margin-top: 0.5em; margin-bottom: 0.5em;
+}
+p {
+	margin: 1em 0px;
+}
+a {
+	color: rgb(243, 121, 43); text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+p.subtitle {
+	margin: 0px 0px 10px; color: rgb(110, 110, 110); text-transform: uppercase; line-height: 1; font-size: 0.86em; font-weight: 600;
+}
+.userDetails {
+	display: none;
+}
+.menu-link {
+	display: none;
+}
+.menu {
+	display: none;
+}
+.search-form {
+	display: none;
+}
+.slider {
+	display: none;
+}
+.newsletter {
+	display: none;
+}
+.footerMenu {
+	display: none;
+}
+.featuredTabs {
+	display: none;
+}
+.flex-control-nav {
+	display: none;
+}
+.flex-direction-nav {
+	display: none;
+}
+.moreLink {
+	display: none;
+}
+.relatedLinks {
+	display: none;
+}
+.relatedBooks {
+	display: none;
+}
+.purchaseLink {
+	display: none;
+}
+.bookReview {
+	display: none;
+}
+.shareThis {
+	display: none;
+}
+.userActions {
+	display: none;
+}
+.lessonTabs {
+	display: none;
+}
+.lessonButtons {
+	display: none;
+}
+.lessonRelated {
+	display: none;
+}
+.bookmark-form {
+	display: none;
+}
+.bookmark-actions {
+	display: none;
+}
+.bookmark-buttons {
+	display: none;
+}
+.modal-wrapper {
+	display: none;
+}
+.bookmark-notes textarea {
+	display: none;
+}
+.bookmark-notes .button {
+	display: none;
+}
+.footer {
+	clear: both;
+}
+.homeContent {
+	clear: both;
+}
+.header h1 img {
+	width: 300px; margin-bottom: 30px; display: block;
+}
+.header h5 img {
+	width: 300px; margin-bottom: 30px; display: block;
+}
+.copyright {
+	padding-top: 40px;
+}
+.copyright img {
+	width: 200px;
+}
+.bookPrimary .postThumb {
+	margin: 0px 30px 30px 0px; float: left;
+}
+.authorDetails {
+	background: rgb(238, 238, 238); padding: 20px; width: 90%; margin-bottom: 30px; float: left;
+}
+.authorDetails img {
+	margin: 0px 30px 10px 0px; float: left;
+}
+.bookSecondary img {
+	display: none;
+}
+.lessonContent {
+	margin-bottom: 30px; display: block !important;
+}
+.lessonRelated {
+	margin-bottom: 30px;
+}
+.lessonSecondary .bookThumbnail img {
+	margin: 0px 30px 30px 0px; width: 150px; height: auto !important; float: left; display: block;
+}
+.lessonSecondary .bookDetails {
+	padding-top: 40px;
+}
+.essaySecondary .bookThumbnail img {
+	margin: 0px 30px 30px 0px; width: 150px; height: auto !important; float: left; display: block;
+}
+.essaySecondary .bookDetails {
+	padding-top: 40px;
+}

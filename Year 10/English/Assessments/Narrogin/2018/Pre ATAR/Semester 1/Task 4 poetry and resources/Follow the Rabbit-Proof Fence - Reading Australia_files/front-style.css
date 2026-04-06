@@ -1,0 +1,49 @@
+@import url( //fonts.googleapis.com/css?family=Sintony:400,700 );
+.alar-registration-form {
+	padding: 30px; border: 1px dashed rgb(204, 204, 204); border-image: none; font-family: "Sintony",sans-serif; font-size: 12px; display: block;
+}
+.alar-login-form {
+	padding: 30px; border: 1px dashed rgb(204, 204, 204); border-image: none; font-family: "Sintony",sans-serif; font-size: 12px; display: block;
+}
+.alar-registration-heading {
+	text-transform: uppercase; font-family: "Sintony", sans-serif; font-weight: 700;
+}
+.alar-login-heading {
+	text-transform: uppercase; font-family: "Sintony", sans-serif; font-weight: 700;
+}
+.alar-registration-heading {
+	margin: 0px 0px 20px; text-align: center; text-transform: uppercase; font-family: "Sintony",sans-serif; font-size: 24px; font-weight: 700; display: block;
+}
+.alar-login-heading {
+	margin: 0px 0px 20px; text-align: center; text-transform: uppercase; font-family: "Sintony",sans-serif; font-size: 24px; font-weight: 700; display: block;
+}
+.ftxt {
+	margin: 0px 0px 20px; display: block;
+}
+.ftxt::after {
+	overflow: hidden; clear: both; display: block; content: "";
+}
+.ftxt > label {
+	width: 180px; float: left;
+}
+.ftxt > input {
+	padding: 8px 5px; border: 1px dashed rgb(204, 204, 204); border-image: none; width: 300px;
+}
+.alar-registration-form .button {
+	background: 0px 0px rgb(204, 204, 204); padding: 10px 20px; border-radius: 0px; border: 1px solid rgb(204, 204, 204); border-image: none; text-transform: uppercase; font-family: "Sintony",sans-serif; font-size: 15px;
+}
+.alar-login-form .button {
+	background: 0px 0px rgb(204, 204, 204); padding: 10px 20px; border-radius: 0px; border: 1px solid rgb(204, 204, 204); border-image: none; text-transform: uppercase; font-family: "Sintony",sans-serif; font-size: 15px;
+}
+.alar-registration-form .button:hover {
+	background: 0px 0px rgb(0, 0, 0); padding: 10px 20px; border-radius: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;
+}
+.alar-login-form .button:hover {
+	background: 0px 0px rgb(0, 0, 0); padding: 10px 20px; border-radius: 0px; border: 1px solid rgb(0, 0, 0); border-image: none;
+}
+.alar-login-form .error {
+	color: red; margin-bottom: 18px;
+}
+.alar-registration-form .error {
+	color: red; margin-bottom: 18px;
+}

@@ -1,0 +1,24 @@
+.quotescollection-quote .attribution {
+	text-align: right; margin-bottom: 1.4em;
+}
+.quotescollection-quote cite.author {
+	font-style: normal;
+}
+.quotescollection-quote cite.source {
+	font-style: italic;
+}
+.quotescollection-quote .nav-next {
+	width: 100%; text-align: left; clear: both; float: none;
+}
+blockquote.quotescollection-quote {
+	background: none; margin: 4em 2em; padding: 0px; border: 0px currentColor; border-image: none; font-size: 1em; box-shadow: none;
+}
+blockquote.quotescollection-quote::before {
+	margin: 0px; padding: 0px; position: relative; content: none;
+}
+blockquote.quotescollection-quote::after {
+	margin: 0px; padding: 0px; position: relative; content: none;
+}
+blockquote.quotescollection-quote footer.attribution cite {
+	font-size: 0.83em;
+}

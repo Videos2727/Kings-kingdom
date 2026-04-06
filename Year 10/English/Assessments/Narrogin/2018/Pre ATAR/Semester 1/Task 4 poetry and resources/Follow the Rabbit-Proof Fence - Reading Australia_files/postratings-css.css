@@ -1,0 +1,24 @@
+.post-ratings {
+	width: 100%; opacity: 1;
+}
+.post-ratings-loading {
+	height: 16px; text-align: left; display: none;
+}
+.post-ratings-image {
+	border: 0px currentColor; border-image: none;
+}
+.post-ratings img {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none;
+}
+.post-ratings-loading img {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none;
+}
+.post-ratings-image img {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none;
+}
+.post-ratings-text {
+	
+}
+.post-ratings-comment-author {
+	font-style: italic; font-weight: normal;
+}

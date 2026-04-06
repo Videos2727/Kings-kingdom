@@ -1,0 +1,72 @@
+.perfect-pullquote blockquote {
+	background: none !important; margin: 0px !important; padding: 0px !important; outline: 0px !important; border: 0px currentColor !important; border-image: none !important; text-align: left !important; font-size: 100% !important; vertical-align: baseline !important; quotes: none !important;
+}
+.perfect-pullquote blockquote p {
+	background: none !important; margin: 0px !important; padding: 0px !important; outline: 0px !important; border: 0px currentColor !important; border-image: none !important; text-align: left !important; font-size: 100% !important; vertical-align: baseline !important; quotes: none !important;
+}
+.perfect-pullquote blockquote::before {
+	content: none !important;
+}
+.perfect-pullquote blockquote::after {
+	content: none !important;
+}
+.perfect-pullquote blockquote p::before {
+	content: none !important;
+}
+.perfect-pullquote blockquote p::after {
+	content: none !important;
+}
+.perfect-pullquote blockquote footer::before {
+	content: "\2014 \00A0" !important;
+}
+.perfect-pullquote blockquote footer {
+	margin-top: 4px;
+}
+.perfect-pullquote blockquote footer cite {
+	font-style: italic;
+}
+.perfect-pullquote blockquote footer cite a {
+	font-style: italic; display: inline-block;
+}
+.perfect-pullquote {
+	margin: 24px 0px; padding: 0.5em 1em; width: 30%; color: rgb(54, 54, 54); line-height: 1.5; font-size: 21px; display: block;
+}
+.pullquote-align-full.perfect-pullquote {
+	width: 95%;
+}
+.perfect-pullquote blockquote p {
+	color: rgb(54, 54, 54); line-height: 1.5; font-size: 21px;
+}
+.pullquote-align-left {
+	margin: 0.5em 1.5em 1em 0px; text-align: left; float: left;
+}
+.pullquote-align-right {
+	margin: 0.5em 0px 1em 1.5em; text-align: left; float: right;
+}
+.pullquote-align-full {
+	margin: 0.5em 0px 1em 1.5em; text-align: left; padding-right: 0px; float: none;
+}
+.pullquote-border-placement-left {
+	border-left-color: rgb(238, 238, 238); border-left-width: 5px; border-left-style: solid;
+}
+.pullquote-border-placement-right {
+	border-right-color: rgb(238, 238, 238); border-right-width: 5px; border-right-style: solid;
+}
+.pullquote-border-placement-top {
+	padding-right: 0.5em; padding-left: 0.5em; border-top-color: rgb(238, 238, 238); border-top-width: 5px; border-top-style: solid;
+}
+@media screen and (max-width:992px) and (min-width:769px)
+{
+.perfect-pullquote {
+	width: 50% !important;
+}
+.pullquote-align-full.perfect-pullquote {
+	margin: 0.5em 0px 1em 0.5em; width: 95% !important;
+}
+}
+@media screen and (max-width:768px)
+{
+.perfect-pullquote {
+	margin: 0.5em 0px 1em 0.5em !important; padding: 0.5em 0px 0.5em 1em; width: 95% !important; border-top-color: currentColor !important; border-right-color: currentColor !important; border-left-color: rgb(238, 238, 238); border-top-width: medium !important; border-right-width: medium !important; border-left-width: 5px; border-top-style: none !important; border-right-style: none !important; border-left-style: solid; float: none;
+}
+}
