@@ -1,0 +1,285 @@
+body {
+	margin: 0px; padding: 0px; border: 0px currentColor; text-align: left; line-height: 16px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal;
+}
+a {
+	color: rgb(0, 51, 153); text-decoration: none;
+}
+a:hover {
+	color: black; text-decoration: underline;
+}
+a:active {
+	color: black; text-decoration: underline;
+}
+img {
+	border: 0px currentColor;
+}
+h1 {
+	color: rgb(0, 51, 153); font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+h2 {
+	color: rgb(0, 51, 153); font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+h3 {
+	color: rgb(0, 51, 153); font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+h4 {
+	color: rgb(0, 51, 153); font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+h5 {
+	color: rgb(0, 51, 153); font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+h1 {
+	font-size: 17px;
+}
+h2 {
+	font-size: 16px;
+}
+h3 {
+	font-size: 14px;
+}
+h4 {
+	font-size: 12px;
+}
+h5 {
+	font-size: 11px;
+}
+sup {
+	font-family: Arial, Helvetica, sans-serif; font-size: 9px; font-weight: bold;
+}
+sub {
+	font-family: Arial, Helvetica, sans-serif; font-size: 9px; font-weight: bold;
+}
+dt {
+	line-height: 14px; font-size: 11px; font-weight: bold; margin-top: 11px;
+}
+dd {
+	line-height: 14px; font-size: 11px; font-weight: normal;
+}
+ol {
+	line-height: 14px; font-size: 11px; list-style-type: decimal; background-color: rgb(255, 255, 255);
+}
+ul {
+	line-height: 14px; font-size: 11px; list-style-type: disc; background-color: rgb(255, 255, 255);
+}
+th {
+	vertical-align: top;
+}
+#menu {
+	background: rgb(255, 255, 255); list-style: none; margin: 0px; padding: 0px; float: left;
+}
+#menu li {
+	list-style: none; margin: 0px; padding: 0px; font-family: "Lucida Grande", Arial, sans-serif; font-size: 12px; float: left;
+}
+#menu a {
+	background: url("http://www.atomicarchive.com/Images/off_bg.gif") repeat-x left top rgb(204, 204, 204); border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentColor rgb(102, 102, 102) rgb(102, 102, 102) currentColor; margin: 0px; padding: 4px 8px 4px 14px; color: rgb(50, 82, 120); text-decoration: none; float: left; display: block;
+}
+#menu a:hover {
+	background: url("http://www.atomicarchive.com/Images/arrow_on.gif") no-repeat left rgb(255, 255, 255); color: rgb(51, 51, 51);
+}
+#t-current a {
+	background: url("http://www.atomicarchive.com/Images/arrow_on.gif") no-repeat left rgb(255, 255, 255); color: rgb(51, 51, 51);
+}
+#masthead {
+	width: 770px;
+}
+#logo {
+	border-bottom-color: rgb(102, 102, 102); border-bottom-width: 1px; border-bottom-style: solid; float: left; background-color: rgb(232, 232, 232);
+}
+#ad {
+	padding: 10px 29px 10px 30px; border-right-color: rgb(102, 102, 102); border-bottom-color: rgb(102, 102, 102); border-right-width: 1px; border-bottom-width: 1px; border-right-style: solid; border-bottom-style: solid; float: left; display: block; background-color: rgb(232, 232, 232);
+}
+#search {
+	text-align: right; vertical-align: text-top; float: right;
+}
+#search input {
+	padding-top: 3px; vertical-align: bottom;
+}
+#search p {
+	line-height: 13px; font-family: Verdana, Geneva, Arial, sans-serif; font-size: 12px; font-weight: bold; margin-top: 0px; vertical-align: bottom; display: inline;
+}
+#subnav {
+	margin: 1px 5px 5px; width: 770px; font-size: 10px; float: left; background-color: rgb(255, 255, 255);
+}
+#subnav ul {
+	padding-left: 0px; font-size: 10px; margin-left: 0px; display: inline;
+}
+#subnav ul li {
+	padding-left: 0px; font-size: 10px; margin-left: 0px; display: inline; background-color: rgb(255, 255, 255);
+}
+#subnav ul li.currentSection {
+	padding: 0px; font-weight: bold; margin-left: 0px; display: inline; background-color: rgb(255, 255, 255);
+}
+.currentSection {
+	font-weight: bold;
+}
+#trahs {
+	
+}
+#mainContent {
+	width: auto; clear: left; float: left;
+}
+#content {
+	margin: 10px 30px 20px 20px; width: 570px; height: auto; float: left; display: inline; voice-family: inherit;
+}
+#sidebar {
+	margin: 15px 5px 0px; width: 140px; clear: none; float: left; background-color: rgb(204, 204, 204);
+}
+#sidebar p {
+	margin: 10px; text-align: left; line-height: 12px; font-size: 9px;
+}
+#sidebar h1 {
+	margin: 5px; text-align: left; color: black; line-height: 12px; font-size: 11px; font-weight: bold;
+}
+#sidebar h2 {
+	text-align: center; color: rgb(0, 0, 0); line-height: 12px; font-size: 9px; font-style: normal; font-weight: normal;
+}
+#sidebar img {
+	text-align: center; margin-right: auto; margin-left: auto; display: block;
+}
+#sidebar ul {
+	text-align: left; line-height: 24px;
+}
+li {
+	text-align: left; line-height: 24px;
+}
+.sidebarTop {
+	margin-top: 0px; margin-bottom: 0px; margin-left: 0px; vertical-align: top;
+}
+.sidebarBottom {
+	clear: both; margin-right: 0px; margin-bottom: -7px; margin-left: 0px; vertical-align: bottom; display: inline;
+}
+#siteInfo {
+	margin: 0px; width: 700px; padding-top: 50px; clear: both; display: block;
+}
+#siteInfo img {
+	padding-right: 10px; padding-left: 10px; vertical-align: middle;
+}
+#siteInfo p {
+	color: rgb(102, 102, 102); line-height: 13px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;
+}
+#grant {
+	color: rgb(153, 153, 153); line-height: 14px; font-size: 10px; vertical-align: middle; float: left;
+}
+#grant img {
+	margin-right: 10px; float: left;
+}
+.badge {
+	margin-top: 3px;
+}
+#docFrame {
+	padding-top: 10px; border-top-color: gray; border-top-width: 1px; border-top-style: solid;
+}
+#docFrame ul {
+	line-height: 16px; font-size: 12px; margin-bottom: 8px; background-color: rgb(255, 255, 255);
+}
+ol {
+	line-height: 16px; font-size: 12px; margin-bottom: 8px; background-color: rgb(255, 255, 255);
+}
+li {
+	line-height: 16px; font-size: 12px; margin-bottom: 8px; background-color: rgb(255, 255, 255);
+}
+#docFrame ul li {
+	list-style: none;
+}
+#content ol {
+	list-style-type: decimal;
+}
+li {
+	list-style-type: decimal;
+}
+#leftColumn {
+	width: 50%; float: left;
+}
+#rightColumn {
+	width: 45%; margin-left: 10px; float: left;
+}
+#leftColumn ul li {
+	list-style-type: none;
+}
+#rightColumn ul li {
+	list-style-type: none;
+}
+#contentNav {
+	text-align: right; clear: both; margin-top: 40px;
+}
+#leftColumnHP {
+	margin: 0px 0px 20px 20px; width: 420px; float: left;
+}
+#rightColumnHP {
+	margin: 0px 0px 20px 10px; width: 300px; float: left;
+}
+.pod {
+	margin-top: 20px; margin-bottom: 20px;
+}
+.podHeaderGraphic {
+	margin-bottom: 10px;
+}
+#homePageTopics {
+	padding-top: 20px;
+}
+.menuGroup {
+	margin: 0px 15px 15px 5px; width: 240px; height: 125px; border-top-color: gray; border-top-width: 1px; border-top-style: dashed; float: left; display: block;
+}
+.menuGroup img {
+	margin: 5px 10px 30px 5px; float: left; display: block;
+}
+.menuGroup p {
+	margin: 0px 5px 0px 0px; line-height: 12px; font-family: Arial, Helvetica, sans-serif; font-size: 10px;
+}
+.menuGroup h4 {
+	color: rgb(0, 51, 153); font-family: Arial, Helvetica, Verdana, sans-serif; font-size: 12px; margin-top: 5px;
+}
+.menuGroupMore {
+	text-align: right; margin-right: 5px;
+}
+#quote {
+	margin: 50px 50px 0px; color: rgb(102, 102, 102); line-height: 13px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;
+}
+.quoteName {
+	text-align: right;
+}
+.sitename {
+	font-family: Arial, Helvetica, Verdana, sans-serif; font-size: 12px; font-weight: bold; margin-bottom: -10px;
+}
+.siteurl {
+	color: rgb(170, 170, 170); font-size: 10px; font-weight: normal; margin-bottom: -6px;
+}
+.sitetext {
+	margin-left: 20px;
+}
+.centerGroup {
+	text-align: center; margin-right: auto; margin-left: auto; display: block;
+}
+.photoframe {
+	margin: 5px; padding: 5px; border: 1px solid rgb(204, 204, 204);
+}
+.center {
+	text-align: center;
+}
+.caption {
+	color: rgb(0, 0, 0); line-height: 13px; font-size: 10px; font-style: normal;
+}
+.teaser {
+	line-height: 13px; font-size: 11px; font-weight: bold;
+}
+.source {
+	line-height: 12px; font-size: 10px; font-style: italic;
+}
+.productImage {
+	margin-right: 10px; margin-bottom: 10px;
+}
+.indent {
+	margin-left: 20px;
+}
+.grey {
+	color: rgb(153, 153, 153);
+}
+.latlong {
+	color: rgb(153, 153, 153); font-size: 11px;
+}
+#wrapper {
+	clear: left;
+}
+.clear {
+	clear: both; float: left;
+}

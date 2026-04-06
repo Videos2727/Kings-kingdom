@@ -1,0 +1,93 @@
+.btn2 {
+	background: -ms-linear-gradient(rgba(250, 248, 241, 1) 0%, rgba(236, 226, 198, 1) 100%) rgb(236, 226, 198); border-width: 1px; border-style: solid; border-color: rgb(224, 224, 224) rgb(192, 192, 192) rgb(192, 192, 192) rgb(224, 224, 224); margin: 0px; padding: 0px; border-radius: 3px; text-align: center; color: rgb(0, 0, 0) !important; font-family: Verdana, Arial, Sans-serif; font-weight: normal; text-decoration: none; vertical-align: middle; display: inline-block; cursor: pointer; -moz-border-radius: 3px; -webkit-border-radius: 3px;
+}
+.btn2_simple.btn2 {
+	padding: 0px 0.4em;
+}
+input.btn2 {
+	padding: 0px 0.4em 0.12em;
+}
+.btn2 .btn2_text {
+	margin: 0px; font-weight: normal; display: none;
+}
+.btn2 .btn2_glyph {
+	margin: 0px; font-weight: normal; display: none;
+}
+.btn2_text_on.btn2 .btn2_text {
+	margin: 0px 0.3em; display: inline;
+}
+.btn2_glyph_on.btn2 .btn2_glyph {
+	margin: 0px 0.4em; width: 1em; display: inline-block;
+}
+.btn2_text_on.btn2_glyph_on .btn2_text {
+	margin: 0px 0.8em 0px 0.4em;
+}
+.btn2_text_on.btn2_glyph_on .btn2_glyph {
+	margin-right: 0px;
+}
+.bold.btn2 {
+	color: rgb(51, 51, 51) !important; font-weight: bold;
+}
+.lefty.btn2 {
+	border-radius: 3px 0px 0px 3px; -moz-border-radius: 3px 0 0 3px; -webkit-border-radius: 3px 0 0 3px;
+}
+.righty.btn2 {
+	border-radius: 0px 3px 3px 0px; -moz-border-radius: 0 3px 3px 0; -webkit-border-radius: 0 3px 3px 0;
+}
+.btn2 {
+	height: 1.75em !important; line-height: 1.75em !important;
+}
+.medium.btn2 {
+	font-size: 13px;
+}
+.btn2 {
+	font-size: 13px;
+}
+.large.btn2 {
+	font-size: 16px;
+}
+.huge.btn2 {
+	font-size: 24px;
+}
+.small.btn2 {
+	font-size: 10px;
+}
+.primary.btn2 {
+	background: -ms-linear-gradient(rgba(254, 252, 234, 1) 0%, rgba(243, 206, 0, 1) 100%) rgb(243, 206, 0); border-color: rgb(213, 171, 85) rgb(204, 153, 51) rgb(204, 153, 51) rgb(213, 171, 85);
+}
+.btn2_play.btn2 {
+	background: -ms-linear-gradient(rgba(99, 98, 96, 1) 0%, rgba(43, 43, 43, 1) 100%) rgb(43, 43, 43); border-color: rgb(101, 101, 101); border-radius: 0.25em; color: white !important; box-shadow: 0px 0px 5px rgba(0,0,0,0.5); -moz-border-radius: .25em; -webkit-border-radius: .25em; -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, .5); -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
+}
+.btn2_play.btn2:hover {
+	background: -ms-linear-gradient(rgba(167, 185, 200, 1) 0%, rgba(29, 98, 153, 1) 100%) rgb(29, 98, 153); border-color: rgb(101, 101, 101) !important;
+}
+a:hover .btn2_play.btn2 {
+	background: -ms-linear-gradient(rgba(167, 185, 200, 1) 0%, rgba(29, 98, 153, 1) 100%) rgb(29, 98, 153); border-color: rgb(101, 101, 101) !important;
+}
+.disabled.btn2 {
+	border-color: rgb(173, 178, 181) !important; color: rgb(131, 131, 131) !important; cursor: default; background-image: none; background-color: rgb(244, 244, 244) !important;
+}
+.selected.btn2 {
+	background-position: bottom; border-color: rgb(230, 184, 0); color: rgb(204, 153, 0) !important; background-color: rgb(254, 224, 134);
+}
+.btn2:hover {
+	border-color: rgb(230, 184, 0) !important; text-decoration: none !important; background-image: none;
+}
+.btn2:active {
+	background-position: bottom; background-image: inherit;
+}
+.btn2:focus {
+	
+}
+.btn2 .btn2_down {
+	border-width: 0.35em 0.35em medium; border-style: solid solid none; border-color: black transparent currentColor; margin: 0.1em 0.15em; width: 0px; height: 0px; display: block;
+}
+.btn2 .btn2_spin {
+	background: url("/images/rating/spinner.gif") no-repeat center; width: 0.9em; height: 0.7em; display: block;
+}
+.btn2 .btn2_check {
+	color: green;
+}
+.btn2 .btn2_error {
+	color: red;
+}

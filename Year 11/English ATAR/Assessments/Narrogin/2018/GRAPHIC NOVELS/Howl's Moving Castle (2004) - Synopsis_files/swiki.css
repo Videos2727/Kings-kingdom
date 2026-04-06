@@ -1,0 +1,345 @@
+.swiki {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.swiki .hide {
+	display: none;
+}
+.swiki .click {
+	cursor: pointer;
+}
+.swiki .text.click {
+	color: rgb(0, 0, 255);
+}
+.swiki .text.click:hover {
+	color: rgb(255, 0, 0); text-decoration: underline;
+}
+.swiki img.spin {
+	vertical-align: middle; display: none;
+}
+.swiki .busy img.spin {
+	display: inline;
+}
+.swiki input {
+	border: 1px solid rgb(204, 204, 204); font-family: Arial, Helvetica, sans-serif; font-size: medium;
+}
+.swiki textarea {
+	border: 1px solid rgb(204, 204, 204); font-family: Arial, Helvetica, sans-serif; font-size: medium;
+}
+.swiki select {
+	border: 1px solid rgb(204, 204, 204); font-family: Arial, Helvetica, sans-serif; font-size: medium;
+}
+.swiki .diff .add {
+	color: rgb(0, 136, 0);
+}
+.swiki .diff .remove {
+	color: rgb(255, 0, 0); text-decoration: line-through;
+}
+.swiki .diff .same {
+	
+}
+.swiki .error {
+	color: rgb(255, 0, 0); font-weight: bold;
+}
+.swiki_object_table {
+	margin: 2px 2px 4px; border-collapse: collapse;
+}
+.swiki_object_table td {
+	border: 1px solid black; vertical-align: top;
+}
+.swiki_object_table th {
+	border: 1px solid black; vertical-align: top;
+}
+.swiki_object_table th {
+	background: rgb(238, 238, 238);
+}
+.swiki_action {
+	margin-bottom: 2px;
+}
+.swiki_preview {
+	background: rgb(255, 255, 136);
+}
+.spoiler {
+	border: 1px solid red; background-image: url("/images/spoilers.gif");
+}
+.spoiler span {
+	visibility: hidden;
+}
+.hover.spoiler {
+	border: currentColor; background-image: none;
+}
+.hover.spoiler span {
+	visibility: visible;
+}
+.swiki p {
+	line-height: 1.7em; font-size: 12px;
+}
+.swiki ul {
+	line-height: 2em; font-size: 12px; list-style-type: square;
+}
+.swiki_watchlist {
+	border-collapse: collapse;
+}
+.swiki_watchlist th {
+	background: rgb(204, 204, 204);
+}
+.swiki_watchlist td {
+	padding: 2px; border: 1px solid rgb(0, 0, 0); vertical-align: top; empty-cells: show;
+}
+.swiki_watchlist th {
+	padding: 2px; border: 1px solid rgb(0, 0, 0); vertical-align: top; empty-cells: show;
+}
+.swiki #swiki_control {
+	text-align: right;
+}
+.swiki #swiki_body {
+	padding: 8px; border: 1px solid rgb(136, 136, 136); overflow: hidden;
+}
+.swiki button {
+	cursor: pointer;
+}
+.swiki .tabs button {
+	background: url("/images/swiki/tab.gif") repeat-x rgb(172, 179, 215); border-width: 1px 1px medium; border-style: solid solid none; border-color: rgb(172, 179, 215) rgb(172, 179, 215) currentColor rgb(255, 255, 255); top: 1px; height: 2.3em; color: rgb(0, 0, 136); padding-bottom: 2px; font-size: 92%; font-weight: bold; position: relative;
+}
+.swiki .tabs button:hover span {
+	text-decoration: underline;
+}
+.swiki #swiki_control button.first {
+	width: auto;
+}
+.swiki #swiki_control2 button.first {
+	width: auto;
+}
+.swiki_type_faq #swiki_control button.first {
+	
+}
+.swiki_type_faq #swiki_control2 button.first {
+	
+}
+.swiki .tabs button.first {
+	border-left-color: rgb(172, 179, 215);
+}
+.swiki .tabs button.last {
+	margin-right: 8px;
+}
+.swiki .tabs button.active {
+	background: url("/images/swiki/tab-active.gif") repeat-x rgb(255, 255, 255); border-color: rgb(136, 136, 136) rgb(136, 136, 136) rgb(255, 255, 255); height: 2.4em; border-bottom-width: 1px; border-bottom-style: solid;
+}
+.swiki button.collapse {
+	background: rgb(255, 255, 255); padding: 0px; border: 2px solid rgb(136, 136, 136); width: 20px; height: 20px; font-weight: bold;
+}
+.swiki .lock {
+	background: rgb(204, 238, 255); text-align: center; margin-bottom: 4px;
+}
+.swiki .lock b {
+	top: 10px; font-size: 136%; position: relative;
+}
+.swiki .lock div {
+	text-align: right; right: 4px; font-size: 77%; font-weight: bold; position: relative;
+}
+.swiki #swiki_watch_blurb {
+	text-align: center; color: rgb(221, 17, 51); font-weight: bold;
+}
+.swiki .section {
+	border-bottom-color: rgb(172, 179, 215); border-bottom-width: 1px; border-bottom-style: solid;
+}
+#tn15 .swiki .section h3 {
+	margin-top: 1em; margin-right: 12em; margin-bottom: 0px;
+}
+.swiki .section h3 {
+	margin-top: 1em; margin-right: 12em; margin-bottom: 0px;
+}
+.swiki .section br {
+	margin-top: 0.8em;
+}
+.swiki .section .tabs {
+	bottom: 2.22em; font-size: 85%; float: right; position: relative;
+}
+.swiki .section .tabs button {
+	font-weight: normal;
+}
+.swiki .section .tabs button.last {
+	margin-right: 0px;
+}
+.swiki .tabs button.b_unwatch {
+	color: rgb(221, 17, 51);
+}
+.swiki .buttons {
+	margin-top: 8px;
+}
+.swiki .buttons button {
+	background: no-repeat; padding: 0px; border: 0px currentColor; width: auto; height: auto; margin-right: 8px;
+}
+.swiki button.b_reply {
+	background: no-repeat; padding: 0px; border: 0px currentColor; width: auto; height: auto; margin-right: 8px;
+}
+.swiki .inline button {
+	background: no-repeat; padding: 0px; border: 0px currentColor; width: auto; height: auto; margin-right: 8px;
+}
+.swiki button.b_reply {
+	margin: 0px;
+}
+.swiki .inline button {
+	margin: 0px;
+}
+.swiki .buttons button span {
+	visibility: hidden;
+}
+.swiki .buttons button.b_save {
+	width: 73px; height: 24px; background-image: url("/images/swiki/buttons/save.jpg");
+}
+.swiki .buttons button.b_revert {
+	width: 73px; height: 24px; background-image: url("/images/swiki/buttons/revert.jpg");
+}
+.swiki .buttons button.b_preview {
+	width: 73px; height: 24px; background-image: url("/images/swiki/buttons/preview.jpg");
+}
+.swiki .buttons button.b_i18n {
+	padding: 1px; border: 1px solid rgb(0, 0, 0); cursor: pointer; background-color: rgb(226, 203, 62);
+}
+.swiki .buttons button.b_i18n span {
+	font-weight: bold; visibility: visible;
+}
+.swiki .buttons button.b_cancel {
+	width: auto; height: auto; color: rgb(0, 0, 255); font-size: 85%;
+}
+.swiki button.b_reply {
+	width: auto; height: auto; color: rgb(0, 0, 255); font-size: 85%;
+}
+.swiki .inline button {
+	width: auto; height: auto; color: rgb(0, 0, 255); font-size: 85%;
+}
+.swiki .buttons button.b_cancel span {
+	visibility: visible;
+}
+.swiki .buttons button.b_cancel:hover span {
+	text-decoration: underline;
+}
+.swiki button.b_reply:hover span {
+	text-decoration: underline;
+}
+.swiki .inline button:hover span {
+	text-decoration: underline;
+}
+.swiki .edit {
+	background: rgb(240, 245, 255); padding: 8px; border: 1px solid rgb(136, 136, 204); margin-top: 8px;
+}
+.swiki .edit input[type=text] {
+	width: 100%;
+}
+.swiki .edit textarea {
+	width: 100%;
+}
+.swiki .warning {
+	color: rgb(204, 0, 0); font-weight: bold;
+}
+.swiki div.warning {
+	text-align: center;
+}
+.swiki .sortable li {
+	cursor: move;
+}
+.swiki .history {
+	background: rgb(250, 247, 234); padding: 8px;
+}
+.swiki .user {
+	background: rgb(250, 247, 234); float: right;
+}
+.swiki .user {
+	font-size: x-small;
+}
+.swiki .user option {
+	font-size: x-small;
+}
+.swiki #swiki_last {
+	font-style: italic; margin-bottom: 4px;
+}
+.swiki a.sig {
+	font-style: italic; text-decoration: none;
+}
+.swiki .clear::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+* html .swiki .clear {
+	height: 1%;
+}
+.swiki #swiki_control2 {
+	text-align: right; display: none;
+}
+.swiki #swiki_control2 .tabs button {
+	border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor rgb(172, 179, 215) rgb(172, 179, 215) rgb(255, 255, 255); top: -1px; padding-bottom: 2px;
+}
+.swiki #swiki_control2 .tabs button.first {
+	border-left-color: rgb(172, 179, 215);
+}
+.swiki #swiki_control2 .tabs button.active {
+	border-color: rgb(255, 255, 255) rgb(136, 136, 136) rgb(136, 136, 136); height: 2.4em; border-top-width: 1px; border-top-style: solid;
+}
+#swiki_ie td.first {
+	width: 99%;
+}
+#swiki_ie td.last {
+	width: 100px;
+}
+.swiki form {
+	margin: 0px; display: inline;
+}
+.swiki_intro {
+	font-size: 85%;
+}
+.swiki_intro .left {
+	float: left;
+}
+.swiki_intro .box {
+	padding: 4px; border: 1px solid rgb(136, 0, 0); width: 60%; line-height: 110%;
+}
+.swiki_intro .help {
+	text-align: right; font-weight: bold;
+}
+.swiki_intro .disclaimer {
+	width: 26em; font-size: 91%; margin-bottom: 4px;
+}
+.swiki_intro .noleft {
+	margin-bottom: -16px;
+}
+.swiki .toc {
+	background: rgb(238, 238, 238); border: 1px solid rgb(136, 136, 136); font-size: 91%; margin-top: 8px; margin-right: 8px; margin-bottom: 8px;
+}
+.swiki .toc-toggle span {
+	font-weight: bold;
+}
+.swiki .toc-main {
+	margin-top: 4px;
+}
+.swiki .toc-1 {
+	margin-left: 0.5em;
+}
+.swiki .toc-2 {
+	margin-left: 1.5em;
+}
+.swiki .toc-3 {
+	margin-left: 2.5em;
+}
+.swiki .toc .toc-toggle-show {
+	display: none;
+}
+.swiki .toc-hide .toc-toggle-show {
+	display: inline;
+}
+.swiki .toc .toc-toggle-hide {
+	display: inline;
+}
+.swiki .toc-hide .toc-toggle-hide {
+	display: none;
+}
+.swiki .toc-hide .toc-main {
+	display: none;
+}
+.swiki#tn15adrhs {
+	margin-left: 522px; float: none; display: block; position: absolute; z-index: 2;
+}
+.swiki #top_rhs_wrapper {
+	background: rgb(255, 255, 255);
+}
+#swiki_ad_spacer {
+	margin-left: 5px; float: right; position: relative;
+}

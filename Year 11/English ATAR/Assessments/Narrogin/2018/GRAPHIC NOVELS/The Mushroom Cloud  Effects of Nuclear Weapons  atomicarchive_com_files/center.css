@@ -1,0 +1,12 @@
+body {
+	background: url("http://www.atomicarchive.com/Images/centerframe.jpg") repeat-y 50% top rgb(3, 62, 106);
+}
+#wrap1 {
+	margin: 0px auto; padding: 0px; width: 800px; text-align: left;
+}
+#wrap2 {
+	text-align: left; background-color: rgb(255, 255, 255);
+}
+#grant {
+	background-color: rgb(255, 255, 255);
+}

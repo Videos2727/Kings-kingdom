@@ -1,0 +1,432 @@
+.navbarSprite {
+	background-image: url("/images/navbar/navbar_sprite_social.png"); background-attachment: scroll; background-repeat: no-repeat; background-color: transparent;
+}
+#navbar {
+	background: linear-gradient(rgb(100, 100, 100) 0%, rgb(14, 14, 14) 100%); font: 10pt/normal Verdana, Arial, sans-serif; margin: 15px auto auto 0px; padding: 0px; width: 1008px; height: 83px; color: rgb(255, 255, 255); border-top-color: rgb(68, 68, 68); border-top-width: 1px; border-top-style: solid; position: relative; z-index: 200; font-size-adjust: none; font-stretch: normal;
+}
+#navbar a:hover {
+	text-decoration: underline;
+}
+#navbar a.fallback {
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 2.5%); width: 100%; height: 100%; display: inline-block; position: absolute;
+}
+#home_img {
+	background-position: 0px -70px; border: currentColor; left: 20px; top: 17px; width: 101px; height: 49px; display: block; position: absolute; z-index: 10000;
+}
+#home_img:hover {
+	background-position: 0px -119px;
+}
+#navbar .alt_logo a {
+	left: 35px; top: 17px; color: rgb(255, 255, 255); font-size: 18px; position: absolute; z-index: 1;
+}
+#nb_search {
+	margin: 8px 0px 0px 140px; width: 570px; font-size: 11px; font-weight: bold;
+}
+#nb_search a {
+	color: rgb(255, 255, 255); font-weight: normal; text-decoration: none; vertical-align: middle;
+}
+#navbar input {
+	font: 14px/normal Verdana, Arial, sans-serif; padding: 5px 8px; border-radius: 3px 0px 0px 3px; border: currentColor; width: 419px; height: 19px; vertical-align: middle; font-size-adjust: none; font-stretch: normal; box-shadow: inset 1px 1px 1px rgba(0,0,0,0.4); -moz-border-radius: 3px 0 0 3px; -webkit-border-radius: 3px 0 0 3px; -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4) inset; -webkitz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4) inset;
+}
+#navbar select {
+	background-position: -61px -216px; font: 11px/25px Verdana, Arial, sans-serif; padding: 3px 0px 0px 6px; border: transparent; width: 138px; height: 29px; color: rgb(153, 153, 153); margin-top: 0px; vertical-align: middle; font-size-adjust: none; font-stretch: normal;
+}
+#navbar select:hover {
+	background-position: -61px -176px; color: rgb(0, 0, 0);
+}
+#navbar select option {
+	padding: 4px 0px 4px 8px; color: rgb(0, 0, 0);
+}
+#navbar div.quicksearch_dropdown_wrapper {
+	top: 8px; width: 100px; height: 29px; right: 332px; overflow: hidden; position: absolute; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.4); background-color: white; -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset;
+}
+#navbar div.quicksearch_dropdown_wrapper:hover {
+	background-image: -ms-linear-gradient(bottom, rgb(234, 234, 234) 0%, rgb(255, 255, 255) 100%);
+}
+#more_if_no_javascript {
+	margin-top: 5px; margin-right: -40px; float: right;
+}
+#nb_search .magnifyingglass {
+	background-position: -43px 0px; width: 16px; height: 18px;
+}
+#nb_search .btn.primary {
+	background: -ms-linear-gradient(rgba(242, 242, 242, 1) 0%, rgba(249, 236, 117, 1) 20%, rgba(243, 206, 0, 1) 70%); margin: 0px; border-radius: 0px 3px 3px 0px; height: 29px; vertical-align: middle; float: right; -moz-border-radius: 0 3px 3px 0; -webkit-border-radius: 0 3px 3px 0;
+}
+#nb_search .btn.primary:hover {
+	background: rgb(243, 206, 0); filter:;
+}
+#navbar button.btn {
+	float: right;
+}
+#nb_extra {
+	top: 9px; right: 19px; position: absolute; z-index: 200;
+}
+#nb_extra a {
+	color: rgb(255, 255, 255);
+}
+#consumer_main_nav {
+	left: 140px; bottom: 0px; position: absolute;
+}
+#nb_personal {
+	z-index: 200;
+}
+#consumer_user_nav {
+	right: 10px; bottom: 0px; position: absolute;
+}
+#consumer_user_nav div.sub_nav {
+	left: auto; height: auto; right: 0px; padding-bottom: 10px;
+}
+#nb_extra_nav {
+	font-size: 11px;
+}
+#nb_extra_nav li {
+	padding: 8px 6px 6px; height: auto;
+}
+#nb_extra_nav li:hover {
+	
+}
+#nb_extra_nav #navProMenu {
+	padding: 8px 20px 6px 5px; height: auto;
+}
+#nb_extra_nav #navProMenu:hover {
+	background: linear-gradient(rgba(55, 55, 55, 1) 15%, rgba(80, 80, 80, 1) 50%, rgba(55, 55, 55, 1) 85%);
+}
+#nb_extra_nav #navProMenu span.downArrow {
+	top: 12px; right: 8px;
+}
+#nb_extra_nav li.spacer {
+	padding: 8px 0px 6px; width: auto;
+}
+#nb_extra_nav div.sub_nav {
+	top: 30px; z-index: 10;
+}
+#nb_extra .social {
+	padding: 0px 0px 0px 15px;
+}
+#nb_extra .social a {
+	text-decoration: none;
+}
+#nb_extra .social a:hover {
+	text-decoration: none;
+}
+#nb_extra .social a:active {
+	text-decoration: none;
+}
+#nb_extra .social a:visited {
+	text-decoration: none;
+}
+#nb_extra .desktop-sprite {
+	width: 31px; height: 31px; opacity: 0.8;
+}
+#nb_extra .desktop-sprite:hover {
+	opacity: 1;
+}
+#nb_extra .follow-facebook {
+	background-position: 0px -38px;
+}
+#nb_extra .follow-twitter {
+	background-position: -32px -38px;
+}
+#nb_extra .follow-instagram {
+	background-position: -64px -38px;
+}
+ul.main_nav a {
+	color: rgb(255, 255, 255);
+}
+ul.main_nav {
+	list-style: none; padding: 0px 0px 0px 1px; font-size: 13px;
+}
+ul.noBackground {
+	
+}
+ul.main_nav li {
+	margin: 0px; padding: 7px 40px 0px 15px; height: 39px; float: left; position: relative;
+}
+ul.main_nav li.css_nav_item:hover {
+	background: linear-gradient(rgba(55, 55, 55, 1) 15%, rgba(80, 80, 80, 1) 50%, rgba(55, 55, 55, 1) 85%);
+}
+ul.main_nav li.js_nav_item:hover {
+	background: linear-gradient(rgba(55, 55, 55, 1) 15%, rgba(80, 80, 80, 1) 50%, rgba(55, 55, 55, 1) 85%);
+}
+ul.main_nav li.spacer {
+	background: linear-gradient(rgba(55, 55, 55, 1) 15%, rgba(114, 114, 114, 1) 50%, rgba(35, 35, 35, 1) 85%); padding: 0px; width: 1px; height: 46px;
+}
+ul.main_nav li p {
+	line-height: 120%; cursor: default;
+}
+ul.main_nav li p.navCategory {
+	margin: 0px; vertical-align: middle;
+}
+ul.main_nav li p.singleLine {
+	padding-top: 10px;
+}
+ul.main_nav li a.signin-button {
+	padding: 2px 0px; border-radius: 4px; border: 1px solid rgb(59, 89, 152); text-decoration: none; vertical-align: bottom; position: relative; background-color: rgb(59, 89, 152);
+}
+#navbar a#facebook-signin-link:hover {
+	text-decoration: none;
+}
+#nb_personal .no_arrow {
+	padding-right: 5px;
+}
+#nb_personal .no_arrow:hover {
+	padding-right: 5px;
+}
+#navbar a#facebook-signin-link:hover {
+	text-decoration: none;
+}
+ul.main_nav li span.facebook-logo {
+	width: 15px; height: 15px; margin-right: -3px; margin-left: 3px; vertical-align: bottom; display: inline-block; background-image: url("/images/auth/auth-sprite-x2.png"); background-attachment: scroll; background-repeat: no-repeat; background-size: 16px, 15px; background-origin: padding-box; background-clip: border-box; background-color: transparent;
+}
+ul.main_nav li span.signin-facebook-text {
+	font-size: 10px; font-weight: bold; margin-left: 0px;
+}
+ul.main_nav li a.signin-other-options-text {
+	font-size: 11px; text-decoration: underline; margin-left: 10px;
+}
+ul.main_nav li p.watchlist a {
+	color: rgb(245, 222, 80);
+}
+ul.main_nav li p.watchlist span.count {
+	color: rgb(255, 255, 255);
+}
+ul.main_nav li span.downArrow {
+	border-width: 4px 4px 0px; border-style: solid; border-color: rgb(204, 204, 204) transparent transparent; transition:0.3s; top: 23px; width: 0px; height: 0px; right: 17px; line-height: 0; position: absolute; -moz-transition: .3s;
+}
+#navMenu1 {
+	min-width: 786px;
+}
+#navMenu2 {
+	width: 643px;
+}
+#navMenu3 {
+	width: 500px;
+}
+#navMenu4 {
+	padding: 0px 10px 20px 20px; left: auto; width: 450px; height: auto; right: 0px;
+}
+#navMenu4 span.seeAll {
+	color: rgb(19, 108, 178);
+}
+#navMenu4 span.seeAll a {
+	color: rgb(19, 108, 178);
+}
+#navMenu4 span.seeAll {
+	font-size: 13px; font-weight: normal; margin-top: -1px; float: right;
+}
+#navMenuPro {
+	left: auto; width: 540px; height: 240px; right: 0px;
+}
+#navMenuPro h5 {
+	line-height: 13px; margin-bottom: 3px;
+}
+#navMenuPro p {
+	margin: 0px 0px 1.3em; color: rgb(60, 60, 60); line-height: 13px; font-size: 13px; cursor: pointer;
+}
+#navMenuPro a {
+	color: rgb(19, 108, 178);
+}
+#navMenuPro strong {
+	color: rgb(19, 108, 178);
+}
+#navMenuPro div.subNavListContainer {
+	position: absolute; max-width: none;
+}
+#proAd {
+	top: 0px; right: 0px; position: absolute;
+}
+#proAd img {
+	border-bottom-right-radius: 10px;
+}
+#proLink {
+	display: block;
+}
+div.sub_nav {
+	margin: 0px; left: 0px; top: 46px; height: 315px; display: none; position: absolute; z-index: 200; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; box-shadow: 0px 2px 5px rgba(0,0,0,0.6); background-color: rgb(242, 242, 241); -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6); -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+div.sub_nav h5 {
+	margin: 20px 0px 10px; color: rgb(165, 133, 0); position: relative;
+}
+ul.main_nav li.css_nav_item:hover div.sub_nav {
+	display: block;
+}
+div.subNavListContainer {
+	padding-left: 18px; float: left; display: inline-block; min-width: 150px; max-width: 250px;
+}
+div.subNavListContainer img {
+	margin-top: 20px;
+}
+div.subNavListContainer ul {
+	padding: 0px;
+}
+div.subNavListContainer ul li {
+	list-style: none; padding: 0px; height: auto; line-height: 16px; margin-bottom: 5px; float: none;
+}
+div.subNavListContainer ul li:hover {
+	list-style: none; padding: 0px; height: auto; line-height: 16px; margin-bottom: 5px; float: none;
+}
+div.subNavListContainer a {
+	color: rgb(85, 85, 85); font-size: 13px;
+}
+ul#navWatchlist {
+	list-style: none; padding: 0px;
+}
+ul#navWatchlist li {
+	margin: 0px 10px 0px 0px; padding: 0px; height: auto; float: left;
+}
+ul#navWatchlist li img.watchListItem {
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.9);
+}
+ul#navWatchlist li span.noPosterText {
+	padding: 0px 8px; left: 0px; width: 126px; bottom: 10px; color: rgb(136, 136, 136); overflow: hidden; white-space: nowrap; position: absolute; -ms-text-overflow: ellipsis;
+}
+#navbar #fewer-than-four {
+	top: 41px; width: 460px; position: absolute;
+}
+#navbar #fewer-than-four ul.main_nav {
+	text-align: center; bottom: 0px; position: relative;
+}
+#navbar #fewer-than-four ul.main_nav li {
+	float: none; display: inline;
+}
+#navbar #fewer-than-four ul.main_nav li a {
+	display: inline;
+}
+#navbar #fewer-than-four ul.main_nav li ul.sub_nav {
+	left: 0px; top: 20px;
+}
+#navbar #fewer-than-four ul.main_nav li ul.sub_nav li a {
+	margin: 0px; display: block;
+}
+#nb20 {
+	padding-top: 1px; margin-top: -1px; background-image: none; background-color: rgb(87, 87, 87);
+}
+.supertab#nb20 #navbar {
+	margin-top: 0px;
+}
+.banner#nb20 #navbar {
+	margin-top: 5px;
+}
+.supertab#nb20 {
+	background-image: none;
+}
+#tn15title {
+	
+}
+#large-searchbox {
+	display: none;
+}
+.banner#nb20 #top_ad_wrapper {
+	text-align: left; padding-top: 5px; padding-left: 140px; position: relative;
+}
+#titleAd {
+	right: 0px; position: absolute; min-height: 315px; border-bottom-right-radius: 10px;
+}
+#nameAd {
+	right: 0px; position: absolute; min-height: 315px; border-bottom-right-radius: 10px;
+}
+#titleAd {
+	min-width: 410px;
+}
+#nameAd {
+	min-width: 250px;
+}
+#titleAd img.mainImage {
+	right: 0px; position: absolute; border-bottom-right-radius: 10px;
+}
+#nameAd img.mainImage {
+	right: 0px; position: absolute; border-bottom-right-radius: 10px;
+}
+#titleAd img.sideCar {
+	top: -15px; right: -50px; position: absolute;
+}
+#nameAd img.sideCar {
+	top: -15px; right: -50px; position: absolute;
+}
+#titleAd div.overlay {
+	background: rgba(0, 0, 0, 0.5); padding: 0px 7px; right: 0px; bottom: 0px; line-height: 140%; position: absolute; border-bottom-right-radius: 10px;
+}
+#nameAd div.overlay {
+	background: rgba(0, 0, 0, 0.5); padding: 0px 7px; right: 0px; bottom: 0px; line-height: 140%; position: absolute; border-bottom-right-radius: 10px;
+}
+#titleAd div.overlay {
+	width: 396px;
+}
+#nameAd div.overlay {
+	width: 236px;
+}
+#titleAd div.overlay p {
+	line-height: 150%;
+}
+#nameAd div.overlay p {
+	line-height: 150%;
+}
+#latestHeadlines {
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 3%) rgb(255, 255, 255); width: 315px; right: 0px; padding-left: 5px; position: absolute; min-height: 315px; border-bottom-right-radius: 10px;
+}
+#latestHeadlines ul li {
+	margin-bottom: 20px;
+}
+#latestHeadlines ul li a {
+	color: rgb(19, 108, 178);
+}
+#latestHeadlines ul li span.time {
+	color: rgb(153, 153, 153); font-size: 11px;
+}
+.login-colorbox #cboxTopLeft {
+	
+}
+.login-colorbox #cboxTopCenter {
+	
+}
+.login-colorbox #cboxTopRight {
+	
+}
+.login-colorbox #cboxMiddleLeft {
+	
+}
+.login-colorbox #cboxMiddleRight {
+	
+}
+.login-colorbox #cboxBottomLeft {
+	
+}
+.login-colorbox #cboxBottomCenter {
+	
+}
+.login-colorbox #cboxBottomRight {
+	
+}
+.login-colorbox #cboxContent {
+	border-radius: 15px; -webkit-border-radius: 15px;
+}
+.login-colorbox #cboxClose {
+	right: 10px;
+}
+#site-stripe {
+	text-align: center; color: rgb(255, 255, 255); font-size: 120%; border-bottom-color: rgb(221, 221, 204); border-bottom-width: 2px; border-bottom-style: solid; background-color: rgb(119, 34, 34);
+}
+#site-stripe a:link {
+	color: rgb(255, 255, 255); text-decoration: none;
+}
+#site-stripe a:visited {
+	color: rgb(255, 255, 255); text-decoration: none;
+}
+#site-stripe a:active {
+	color: rgb(255, 255, 255); text-decoration: none;
+}
+#site-stripe a:hover {
+	color: rgb(255, 255, 255); text-decoration: underline;
+}
+#site-stripe .less-emphasis {
+	font-size: 85%; margin-top: 1em;
+}
+#new_messages {
+	display: none;
+}
+#hd_msg_icon {
+	display: none;
+}
+.navbar-mail-icon {
+	margin-right: 4px;
+}
