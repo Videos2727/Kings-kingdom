@@ -1,0 +1,19 @@
+CHEMISTRY ASSESSMENT PACKAGE
+
+
+© COPYRIGHT
+
+Vocational Education and Training Publications
+
+
+(2003)
+
+
+This CD contains Microsoft Word documents. The documents are also reproduced in Rich Text Format in a separate folder so that they can be opened in any word processing package - use the FILE > OPEN option.
+
+
+DISCLAIMER
+
+Although all CDs are rigorously checked for errors and viruses, Vocational Education and Training Publications cannot accept any responsibility for any loss or damage to your data or computer system which may occur when using the disc or programs or data on the CD.
+
+
