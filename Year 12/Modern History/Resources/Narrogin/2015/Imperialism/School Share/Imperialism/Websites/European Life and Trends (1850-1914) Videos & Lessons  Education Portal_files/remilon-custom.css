@@ -1,0 +1,83 @@
+html,
+body {
+	min-height: 100%;
+}
+
+.humane,
+.humane-remilon {
+	position: fixed;
+	-moz-transition: all 0.2s ease-out;
+	-webkit-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+	z-index: 100000;
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+}
+
+.humane,
+.humane-remilon {
+	font-family: Ubuntu, Verdana, sans-serif;
+	line-height: 40px;
+	font-size: 25px;
+	top: 25%;
+	left: 25%;
+	opacity: 0;
+	width: 50%;
+	min-height: 40px;
+	padding: 10px;
+	text-align: center;
+	background-color: #000;
+	color: #fff;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+}
+
+.humane p,
+.humane-remilon p,
+.humane ul,
+.humane-remilon ul {
+	margin: 0;
+	padding: 0;
+}
+
+.humane ul,
+.humane-remilon ul {
+	list-style: none;
+}
+
+.humane.humane-remilon-info,
+.humane-remilon.humane-remilon-info {
+	background-color: #00507a;
+}
+
+.humane.humane-remilon-success,
+.humane-remilon.humane-remilon-success {
+	background-color: #007a00;
+}
+
+.humane.humane-remilon-error,
+.humane-remilon.humane-remilon-error {
+	background-color: #7a0000;
+}
+
+.humane.humane-animate,
+.humane-remilon.humane-remilon-animate {
+	opacity: 0.8;
+}
+
+.humane.humane-animate:hover,
+.humane-remilon.humane-remilon-animate:hover {
+	opacity: 0.6;
+}
+
+.humane.humane-js-animate,
+.humane-remilon.humane-remilon-js-animate {
+	opacity: 0.8;
+}
+
+.humane.humane-js-animate:hover,
+.humane-remilon.humane-remilon-js-animate:hover {
+	opacity: 0.6;
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+}
