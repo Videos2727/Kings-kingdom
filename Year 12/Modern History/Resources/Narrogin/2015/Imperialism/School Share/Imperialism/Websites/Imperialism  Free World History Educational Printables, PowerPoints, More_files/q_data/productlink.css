@@ -1,0 +1,142 @@
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:11px}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+
+a:focus, a:active {border: 0;outline: 0;}
+.amzn-ad-container {
+    background: #FFFFFF;
+    width: 118px;
+		overflow:hidden;
+		height: 231px;
+		border:1px solid #ddd;
+		padding:3px 0;
+}
+.amzn-ad-container a{
+	text-decoration:none;
+}
+.amzn-ad-logo-holder{
+	margin:0;
+	padding:0;
+        text-align:center;
+}
+button{
+	border:0px ;
+	padding:0px;
+	font-family:arial;
+	color:#333;
+	cursor:pointer;
+	
+}
+button:focus{
+	outline:0;
+	
+}
+.amzn-ad-white-background{
+	background:#fff
+}
+.amzn-ad-container .amzn-ad-logo-holder {
+        text-align: center;
+}
+
+.amzn-ad-container .amzn-ad-logo-holder a {
+        display: block;
+}
+.amzn-ad-logo-holder {
+        margin:0px;
+        padding:0px;
+}
+
+
+.amzn-ad-image-holder{
+	padding:0px;
+	margin:7px 0;
+	text-align:center;
+}
+.amzn-ad-image-holder img{
+	border:0 !important;
+}
+.amzn-ad-image-holder a{
+	display:inline-block;
+}
+
+
+.amzn-ad-prod-detail{
+	text-align:left;
+	padding:3px 9px;
+	margin:0px;
+        height:34px;
+}	
+.amzn-ad-price-block {
+        text-align:left;
+        padding:0 9px;
+        margin-bottom:9px;
+        
+}
+.amzn-ad-price-block  a{
+	float:left;
+}
+.amzn-ad-price-block .prime{
+	display:inline-block;
+	float:right;
+}
+
+.amzn-ad-privacy{
+	text-align:center;
+	padding:5px 0;
+}
+
+.amzn-ad-privacy-link{
+        font:normal 10px/11px Tahoma, Genava, sans-serif;
+        color:#888;
+        text-decoration:none;
+}	
+.amzn-ad-primary-btn{
+	width:100%; 
+	display:block;
+	padding:6px 0;
+	margin-bottom:3px;
+	border-width:1px 0;
+}
+.amzn-ad-primary-btn span {
+display:block;}
+.amazon .amzn-ad-primary-btn.logo span {
+	text-align:left; 
+	height:25px; 
+	vertical-align:middle; 
+	display:table-cell; 
+	padding-left:30px; 
+	background-repeat:no-repeat;
+	}
+.amazon.amzn-ad-container{
+        border-top:2px solid #FF9900;
+}
+.amazon .amzn-ad-price-block .price,.amazon .amzn-ad-prod-detail #title a,.amazon .amzn-ad-primary-btn .shop {font:normal 13px/17px Arial, Helvetica, sans-serif; color:#333;}
+.amazon .amzn-ad-prod-detail #title a {color:#0066C0;}
+.amazon .amzn-ad-prod-detail {padding:5px 10px 5px;}
+.amazon  .amzn-ad-primary-btn {background: #f8e6b8; padding:3px; background: -moz-linear-gradient(top,  #f8e6b8 0%, #f3d686 6%, #ebb62c 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8e6b8), color-stop(6%,#f3d686), color-stop(100%,#ebb62c));background: -webkit-linear-gradient(top,  #f8e6b8 0%,#f3d686 6%,#ebb62c 100%);background: -o-linear-gradient(top,  #f8e6b8 0%,#f3d686 6%,#ebb62c 100%);background: -ms-linear-gradient(top,  #f8e6b8 0%,#f3d686 6%,#ebb62c 100%);background: linear-gradient(to bottom,  #f8e6b8 0%,#f3d686 6%,#ebb62c 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8e6b8', endColorstr='#ebb62c',GradientType=0 );}
+    .amazon .amzn-ad-primary-btn:hover {background: #f4f2ed; /* Old browsers */
+        background: -moz-linear-gradient(top,  #f4f2ed 0%, #efdeb3 6%, #e8bb4a 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f4f2ed), color-stop(6%,#efdeb3), color-stop(100%,#e8bb4a));background: -webkit-linear-gradient(top,  #f4f2ed 0%,#efdeb3 6%,#e8bb4a 100%);background: -o-linear-gradient(top,  #f4f2ed 0%,#efdeb3 6%,#e8bb4a 100%);background: -ms-linear-gradient(top,  #f4f2ed 0%,#efdeb3 6%,#e8bb4a 100%);background: linear-gradient(to bottom,  #f4f2ed 0%,#efdeb3 6%,#e8bb4a 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f2ed', endColorstr='#e8bb4a',GradientType=0 );}
+            .amazon  .amzn-ad-primary-btn span {color:#111; font-size:14px; background-position:0 0;}
+.amazon .amzn-ad-price-block {height:17px;}
+.amzn-ad-container .amzn-ad-privacy-link-light {
+        color: #dddddd;
+}
+
+
+  .smallparts .amzn-ad-prod-detail{
+        height:42px;
+}
+
+.smallparts.amzn-ad-container{border-top:2px solid #2161D4;}
+.smallparts .amzn-ad-price-block .price, .smallparts .amzn-ad-prod-detail #title a, .smallparts .amzn-ad-primary-btn .shop {font:normal 11px/14px Tahoma, Geneva, sans-serif; color:#111;}
+.smallparts .amzn-ad-prod-detail #title a {color:#2161D4;}
+.smallparts .amzn-ad-primary-btn {border-color:#ccc #ddd #111;background: #666;background: -moz-linear-gradient(top, #666 0%, #333 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#666), color-stop(100%,#333));background: -webkit-linear-gradient(top, #666 0%,#333 100%);background: -o-linear-gradient(top, #666 0%,#333 100%);background: -ms-linear-gradient(top, #666 0%,#333 100%);background: linear-gradient(to bottom, #666 0%,#333 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#666666', endColorstr='#333333',GradientType=0 );}
+.smallparts .amzn-ad-primary-btn:hover {background: #777;background: -moz-linear-gradient(top, #777 0%, #444 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#777), color-stop(100%,#444));background: -webkit-linear-gradient(top, #777 0%,#444 100%);background: -o-linear-gradient(top, #777 0%,#444 100%);background: -ms-linear-gradient(top, #777 0%,#444 100%);background: linear-gradient(to bottom, #777 0%,#444 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#777777', endColorstr='#444444',GradientType=0 );}
+.smallparts .amzn-ad-primary-btn .shop {text-align:center; color:#fff; font-size:14px; line-height:16px; display:block;}
+.smallparts .amzn-ad-prod-detail #title a {color:#2161D4; text-decoration:none;}
+.smallparts .amzn-ad-prod-detail #title a:hover {color:#CC7A00; text-decoration:underline;}
+  .amazon.amzn-ad-container-thin-border,.smallparts.amzn-ad-container-thin-border {
+        border-top: 1px solid #ddd;
+        height: 232px;
+}
+.smallparts .amzn-ad-price-block{height:12px;}
